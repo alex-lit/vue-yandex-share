@@ -2,7 +2,7 @@
 
 Vue-компонент для блока «Поделиться» от Яндекса.
 
-![banner](https://raw.githubusercontent.com/alex-lit/OctoberCMS-Juicy-Theme/vue-yandex-share/docs/screenshot.jpg)
+![banner](https://raw.githubusercontent.com/alex-lit/vue-yandex-share/master/public/screenshot.png)
 
 Если разместить блок на вашем сайте, посетители смогут быстро публиковать в
 своих социальных сетях ссылки на понравившиеся им страницы сайта.
