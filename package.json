@@ -33,7 +33,7 @@
   "homepage": "https://github.com/alex-lit/vue-yandex-share#readme",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build && vue-cli-service build --target lib --name vue-yandex-share ./src/components/vue-yandex-share/vue-yandex-share.vue --no-clean",
+    "build": "cross-env OUTPUT_DIR=docs vue-cli-service build && npm run build:lib",
     "build:lib": "vue-cli-service build --target lib --name vue-yandex-share ./src/components/vue-yandex-share/vue-yandex-share.vue",
     "lint": "vue-cli-service lint",
     "up": "npx npm-check-updates -u && npm i && npm audit fix"
@@ -53,6 +53,7 @@
     "@vue/cli-service": "^4.1.2",
     "@vue/eslint-config-airbnb": "^5.0.2",
     "@vue/eslint-config-typescript": "^5.0.1",
+    "cross-env": "^6.0.3",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-prettier": "^3.1.2",
