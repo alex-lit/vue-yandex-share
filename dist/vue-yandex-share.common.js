@@ -160,12 +160,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c26bd6be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=template&id=2dfbf3d4&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"db8939b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=template&id=22483153&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('figure',{class:['vue-yandex-share', 'ya-share2'],attrs:{"data-access-token":_vm.accessToken,"data-bare":_vm.bare,"data-counter":_vm.counter,"data-copy":_vm.copy,"data-description":_vm.description,"data-direction":_vm.direction,"data-hashtags":_vm.hashtags,"data-image":_vm.image,"data-lang":_vm.lang,"data-limit":_vm.limit,"data-popup-direction":_vm.popupDirection,"data-popup-position":_vm.popupPosition,"data-size":_vm.size,"data-title":_vm.title,"data-url":_vm.url,"data-services":_vm.services}})}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/App.vue?vue&type=template&id=2dfbf3d4&
+// CONCATENATED MODULE: ./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=template&id=22483153&
 
 // CONCATENATED MODULE: ./node_modules/tslib/tslib.es6.js
 /*! *****************************************************************************
@@ -944,10 +944,10 @@ function isPromise(obj) {
     return obj instanceof Promise || (obj && typeof obj.then === 'function');
 }
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/ts-loader??ref--13-2!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/App.vue?vue&type=script&lang=ts&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/ts-loader??ref--13-2!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=script&lang=ts&
 
 
-var Appvue_type_script_lang_ts_VueYandexShare = /** @class */ (function (_super) {
+var vue_yandex_sharevue_type_script_lang_ts_VueYandexShare = /** @class */ (function (_super) {
     __extends(VueYandexShare, _super);
     function VueYandexShare() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -1127,10 +1127,10 @@ var Appvue_type_script_lang_ts_VueYandexShare = /** @class */ (function (_super)
     ], VueYandexShare);
     return VueYandexShare;
 }(external_commonjs_vue_commonjs2_vue_root_Vue_default.a));
-/* harmony default export */ var Appvue_type_script_lang_ts_ = (Appvue_type_script_lang_ts_VueYandexShare);
+/* harmony default export */ var vue_yandex_sharevue_type_script_lang_ts_ = (vue_yandex_sharevue_type_script_lang_ts_VueYandexShare);
 
-// CONCATENATED MODULE: ./src/App.vue?vue&type=script&lang=ts&
- /* harmony default export */ var src_Appvue_type_script_lang_ts_ = (Appvue_type_script_lang_ts_); 
+// CONCATENATED MODULE: ./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var vue_yandex_share_vue_yandex_sharevue_type_script_lang_ts_ = (vue_yandex_sharevue_type_script_lang_ts_); 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
 
@@ -1226,7 +1226,7 @@ function normalizeComponent (
   }
 }
 
-// CONCATENATED MODULE: ./src/App.vue
+// CONCATENATED MODULE: ./src/components/vue-yandex-share/vue-yandex-share.vue
 
 
 
@@ -1235,7 +1235,7 @@ function normalizeComponent (
 /* normalize component */
 
 var component = normalizeComponent(
-  src_Appvue_type_script_lang_ts_,
+  vue_yandex_share_vue_yandex_sharevue_type_script_lang_ts_,
   render,
   staticRenderFns,
   false,
@@ -1245,11 +1245,11 @@ var component = normalizeComponent(
   
 )
 
-/* harmony default export */ var App = (component.exports);
+/* harmony default export */ var vue_yandex_share = (component.exports);
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
 
 
-/* harmony default export */ var entry_lib = __webpack_exports__["default"] = (App);
+/* harmony default export */ var entry_lib = __webpack_exports__["default"] = (vue_yandex_share);
 
 
 

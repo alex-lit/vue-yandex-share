@@ -1,24 +1,84 @@
-# vue-yandex-share
+# Vue Yandex Share
 
-## Project setup
-```
-npm install
-```
+Vue-компонент для блока «Поделиться» от Яндекса.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Если разместить блок на вашем сайте, посетители смогут быстро публиковать в
+своих социальных сетях ссылки на понравившиеся им страницы сайта.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+[Документация Яндекс](//yandex.ru/dev/share/)
 
-### Lints and fixes files
-```
-npm run lint
+[DEMO](#)
+
+## Установка
+
+```bash
+npm i @alexlit/vue-yandex-share -S
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Использование
+
+```vue
+<script>
+  import VueYandexShare from '@alexlit/vue-yandex-share';
+
+  export default {
+    components: { VueYandexShare },
+
+    data() {
+      return {
+        /**
+         * Параметры плагина
+         */
+        options = {
+          accessToken: null,
+          bare: false,
+          counter: false,
+          copy: 'last',
+          description: null,
+          direction: 'horizontal',
+          hashtags: null,
+          image: null,
+          lang: 'ru',
+          limit: 24,
+          popupDirection: 'bottom',
+          popupPosition: 'inner',
+          size: 'm',
+          title: null,
+          url: null,
+          services: [
+            'blogger',
+            'delicious',
+            'digg',
+            'evernote',
+            'facebook',
+            'gplus',
+            'linkedin',
+            'lj',
+            'moimir',
+            'odnoklassniki',
+            'pinterest',
+            'pocket',
+            'qzone',
+            'reddit',
+            'renren',
+            'sinaWeibo',
+            'skype',
+            'surfingbird',
+            'telegram',
+            'tencentWeibo',
+            'tumblr',
+            'twitter',
+            'viber',
+            'vkontakte',
+            'whatsapp',
+          ],
+        };
+      }
+    }
+  };
+</script>
+
+<template>
+  <vue-yandex-share v-bind="options"></vue-yandex-share>
+</template>
+```
