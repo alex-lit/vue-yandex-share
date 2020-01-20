@@ -169,12 +169,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"db8939b8-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=template&id=22483153&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('figure',{class:['vue-yandex-share', 'ya-share2'],attrs:{"data-access-token":_vm.accessToken,"data-bare":_vm.bare,"data-counter":_vm.counter,"data-copy":_vm.copy,"data-description":_vm.description,"data-direction":_vm.direction,"data-hashtags":_vm.hashtags,"data-image":_vm.image,"data-lang":_vm.lang,"data-limit":_vm.limit,"data-popup-direction":_vm.popupDirection,"data-popup-position":_vm.popupPosition,"data-size":_vm.size,"data-title":_vm.title,"data-url":_vm.url,"data-services":_vm.services}})}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"30d17735-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=template&id=0e5ae813&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-yandex-share"})}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=template&id=22483153&
+// CONCATENATED MODULE: ./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=template&id=0e5ae813&
 
 // CONCATENATED MODULE: ./node_modules/tslib/tslib.es6.js
 /*! *****************************************************************************
@@ -961,42 +961,85 @@ var vue_yandex_sharevue_type_script_lang_ts_VueYandexShare = /** @class */ (func
     function VueYandexShare() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         /**
-         * Был ли скрипт вподключен к документу
+         * Инстанс виджета
          */
-        _this.isScriptInserted = false;
+        _this.widget = null;
         return _this;
     }
     /**
+     * При изменении входных параметров переподключает виджет
+     */
+    VueYandexShare.prototype.onPropChanged = function () {
+        this.loadAPIScript(this.$el);
+    };
+    /**
      * Подключение скрипта YandexShare
      */
-    VueYandexShare.prototype.loadAPIScript = function () {
+    VueYandexShare.prototype.loadAPIScript = function (element) {
+        var _a, _b, _c;
         return __awaiter(this, void 0, void 0, function () {
             var src, script;
             var _this = this;
-            return __generator(this, function (_a) {
+            return __generator(this, function (_d) {
+                // eslint-disable-next-line no-unused-expressions
+                (_c = (_a = this.widget) === null || _a === void 0 ? void 0 : (_b = _a).destroy) === null || _c === void 0 ? void 0 : _c.call(_b);
                 src = '//yastatic.net/share2/share.js';
                 if (!document.querySelectorAll("[src*='" + src + "']").length) {
                     script = document.createElement('script');
                     script.setAttribute('src', '//yastatic.net/share2/share.js');
-                    script.setAttribute('async', '');
-                    script.setAttribute('defer', '');
                     document.body.appendChild(script);
                     script.onload = function () {
                         _this.$emit('load');
+                        _this.initialize(element);
                     };
                     script.onerror = function (error) {
                         _this.$emit('error', error);
                     };
                 }
                 else {
-                    this.$emit('load');
+                    this.initialize(element);
                 }
                 return [2 /*return*/];
             });
         });
     };
-    VueYandexShare.prototype.created = function () {
-        this.loadAPIScript();
+    /**
+     * Инициализация виджета
+     */
+    VueYandexShare.prototype.initialize = function (element) {
+        var _this = this;
+        this.widget = window.Ya.share2(element, {
+            content: {
+                url: this.url || window.location.href,
+                title: this.title || document.title,
+                description: this.description,
+                image: this.image,
+            },
+            contentByService: this.contentByService,
+            theme: {
+                bare: this.bare,
+                copy: this.copy,
+                counter: this.counter,
+                direction: this.direction,
+                lang: this.lang,
+                limit: this.limit,
+                popupDirection: this.popupDirection,
+                popupPosition: this.popupPosition,
+                services: this.services.join(','),
+                size: this.size,
+            },
+            hooks: {
+                onready: function () {
+                    _this.$emit('ready');
+                },
+                onshare: function (name) {
+                    _this.$emit('share', name);
+                },
+            },
+        });
+    };
+    VueYandexShare.prototype.mounted = function () {
+        this.loadAPIScript(this.$el);
     };
     __decorate([
         Prop({ type: String })
@@ -1099,7 +1142,7 @@ var vue_yandex_sharevue_type_script_lang_ts_VueYandexShare = /** @class */ (func
     ], VueYandexShare.prototype, "url", void 0);
     __decorate([
         Prop({
-            type: String,
+            type: Array,
             default: function () {
                 return [
                     'blogger',
@@ -1127,10 +1170,21 @@ var vue_yandex_sharevue_type_script_lang_ts_VueYandexShare = /** @class */ (func
                     'viber',
                     'vkontakte',
                     'whatsapp',
-                ].join();
+                ];
             },
         })
     ], VueYandexShare.prototype, "services", void 0);
+    __decorate([
+        Prop({
+            type: Object,
+            default: function () {
+                return {};
+            },
+        })
+    ], VueYandexShare.prototype, "contentByService", void 0);
+    __decorate([
+        Watch('$props', { deep: true })
+    ], VueYandexShare.prototype, "onPropChanged", null);
     VueYandexShare = __decorate([
         vue_class_component_esm({})
     ], VueYandexShare);

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
+  // @ts-ignore
   import { VueGithubCorners } from 'vue2-github-corners';
   import VueYandexShare from '@/components/vue-yandex-share';
 

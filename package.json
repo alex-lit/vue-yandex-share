@@ -33,7 +33,8 @@
   "homepage": "https://github.com/alex-lit/vue-yandex-share#readme",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name vue-yandex-share ./src/components/vue-yandex-share/vue-yandex-share.vue",
+    "build": "vue-cli-service build && vue-cli-service build --target lib --name vue-yandex-share ./src/components/vue-yandex-share/vue-yandex-share.vue --no-clean",
+    "build:lib": "vue-cli-service build --target lib --name vue-yandex-share ./src/components/vue-yandex-share/vue-yandex-share.vue",
     "lint": "vue-cli-service lint",
     "up": "npx npm-check-updates -u && npm i && npm audit fix"
   },
