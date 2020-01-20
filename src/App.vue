@@ -70,7 +70,7 @@
       <article class="app__widget-wrapper">
         <el-divider content-position="left">
           <i class="el-icon-share"></i>
-          Виджет
+          Vue-компонент для блока «Поделиться» от Яндекса
         </el-divider>
         <div class="app__widget-container">
           <vue-yandex-share v-bind="options"></vue-yandex-share>
