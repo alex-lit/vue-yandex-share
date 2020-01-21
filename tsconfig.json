@@ -4,6 +4,7 @@
     "skipLibCheck": true,
     "checkJs": false,
     "noImplicitThis": false,
+    "noImplicitAny": false,
     "declaration": true,
 
     // default

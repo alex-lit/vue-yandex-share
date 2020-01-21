@@ -70,8 +70,6 @@
       <article class="app__widget-wrapper">
         <div class="app__widget-container">
           <vue-yandex-share v-bind="options"></vue-yandex-share>
-          <vue-yandex-share v-bind="options"></vue-yandex-share>
-          <vue-yandex-share v-bind="options"></vue-yandex-share>
         </div>
       </article>
 
@@ -335,9 +333,8 @@
 
 <style lang="postcss" scoped>
   .el-divider {
-  }
-
-  .el-divider .el-divider__text {
-    background-color: #f5f5f5;
+    & .el-divider__text {
+      background-color: #f5f5f5;
+    }
   }
 </style>
