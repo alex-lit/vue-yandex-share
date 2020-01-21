@@ -4,6 +4,7 @@
     "skipLibCheck": true,
     "checkJs": false,
     "noImplicitThis": false,
+    "declaration": true,
 
     // default
     "target": "es5",

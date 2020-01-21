@@ -205,9 +205,14 @@
     private contentByService!: { [key: string]: any };
 
     /**
+     * Адрес скрипта
+     */
+    src: string = '//yastatic.net/share2/share.js';
+
+    /**
      * Инстанс виджета
      */
-    widget: { [key: string]: any } | null = null;
+    widget: { [key: string]: any } | undefined = undefined;
 
     /**
      * При изменении входных параметров переподключает виджет
@@ -218,40 +223,10 @@
     }
 
     /**
-     * Подключение скрипта YandexShare
-     */
-    async loadAPIScript(element: Element | string) {
-      // eslint-disable-next-line no-unused-expressions
-      this.widget?.destroy?.();
-
-      /**
-       * Адрес скрипта
-       */
-      const src: string = '//yastatic.net/share2/share.js';
-
-      if (!document.querySelectorAll(`[src*='${src}']`).length) {
-        const script = document.createElement('script');
-        script.setAttribute('src', '//yastatic.net/share2/share.js');
-
-        document.body.appendChild(script);
-
-        script.onload = () => {
-          this.$emit('load');
-          this.initialize(element);
-        };
-        script.onerror = error => {
-          this.$emit('error', error);
-        };
-      } else {
-        this.initialize(element);
-      }
-    }
-
-    /**
      * Инициализация виджета
      */
     initialize(element: Element | string) {
-      this.widget = (window as any).Ya.share2(element, {
+      this.widget = (window as any).Ya?.share2?.(element, {
         content: {
           url: this.url || window.location.href,
           title: this.title || document.title,
@@ -282,6 +257,48 @@
       });
     }
 
+    /**
+     * Ижидание загрузки скрипта
+     */
+    pollingScriptLoad(element: Element | string) {
+      const pollInterval = setInterval(() => {
+        if ((window as any).Ya) {
+          this.initialize(element);
+          clearInterval(pollInterval);
+        }
+      }, 300);
+      setTimeout(() => {
+        clearInterval(pollInterval);
+      }, 10000);
+    }
+
+    /**
+     * Подключение скрипта YandexShare
+     */
+    loadAPIScript(element: Element | string) {
+      // eslint-disable-next-line no-unused-expressions
+      this.widget?.destroy?.();
+
+      if (!document.querySelectorAll(`[src*='${this.src}']`).length) {
+        const script: HTMLScriptElement = document.createElement('script');
+        script.setAttribute('src', this.src);
+        script.setAttribute('async', 'true');
+        script.setAttribute('defer', 'true');
+
+        document.body.appendChild(script);
+
+        script.onload = () => {
+          this.$emit('load');
+          this.initialize(element);
+        };
+        script.onerror = error => {
+          this.$emit('error', error);
+        };
+      } else {
+        this.pollingScriptLoad(element);
+      }
+    }
+
     mounted() {
       this.loadAPIScript(this.$el);
     }
@@ -291,3 +308,12 @@
 <template>
   <div class="vue-yandex-share"></div>
 </template>
+
+<style lang="postcss" scoped>
+  .vue-yandex-share {
+    transition-duration: 0.3s;
+  }
+  .vue-yandex-share:empty {
+    opacity: 0;
+  }
+</style>
