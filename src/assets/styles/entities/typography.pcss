@@ -1,0 +1,312 @@
+/**
+  * Модификация модуля https://github.com/paulradzkov/bettertext.css
+  */
+
+.typography {
+  font-size: 1rem;
+  line-height: 1.4;
+
+  & *:first-child {
+    margin-top: 0;
+  }
+
+  & *:last-child {
+    margin-bottom: 0;
+  }
+
+  & div:not(:empty) {
+    margin: 0 0 1.5em;
+  }
+
+  & p {
+    /* max-width: 50rem; */
+    margin: 0 0 1.5em;
+  }
+
+  & p::before,
+  & ol::before,
+  & ul::before {
+    display: block;
+    overflow: hidden;
+    width: 10em;
+    content: '';
+  }
+
+  & li p::before {
+    content: none;
+  }
+
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-weight: 400;
+  }
+
+  & h1 {
+    margin: 3.23076923em 0 0.92307692em;
+    font-size: 1.625em;
+  }
+
+  & h2 {
+    margin: 3.13043478em 0 1.04347826em;
+    font-size: 1.4375em;
+  }
+
+  & h3 {
+    margin: 3em 0 1.2em;
+    font-size: 1.25em;
+  }
+
+  & h4 {
+    margin: 2.66666667em 0 1.33333333em;
+    font-size: 1.125em;
+  }
+
+  & h5 {
+    margin: 2.25em 0 1.5em;
+    font-size: 1em;
+  }
+
+  & h6 {
+    margin: 2em 0 0;
+    font-size: 0.75em;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* double headers */
+  & h1 + h2 {
+    margin-top: 1.2em;
+  }
+
+  & h2 + h3 {
+    margin-top: 1.3em;
+  }
+
+  & h3 + h4 {
+    margin-top: 1.4em;
+  }
+
+  & h4 + h5 {
+    margin-top: 1.5em;
+  }
+
+  & h5 + h6 {
+    margin-top: 2em;
+  }
+
+  /* lists */
+
+  /* lists without classes */
+  & ul,
+  & ol {
+    padding-right: 2.5em;
+    padding-left: 0;
+
+    /* max-width: calc(47.5rem); */
+    margin: 0 0 1.5em;
+  }
+
+  & ul ul,
+  & ol ul,
+  & ul ol,
+  & ol ol {
+    margin-bottom: 0;
+  }
+
+  & ul li,
+  & ol li {
+    animation: fixlists 1s;
+    transform: translateX(2.5em);
+  }
+
+  /* images */
+  & img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: var(--box-shadow--active);
+    vertical-align: bottom;
+
+    @nest [data-darkmode='true'] & {
+      box-shadow: none;
+    }
+  }
+
+  & p img:not(:only-child) {
+    vertical-align: baseline;
+  }
+
+  & figure {
+    margin: 3em 0;
+  }
+
+  & figure > p {
+    /* max-width: 37.5rem; */
+    margin: 0.5em 0 0;
+    font-size: 0.75em;
+  }
+
+  & figcaption {
+    /* max-width: 37.5rem; */
+    margin: 0.5em 0 3em;
+    font-size: 0.75em;
+  }
+
+  & figcaption > p {
+    margin: 0.5em 0 0;
+  }
+
+  /* blockquotes */
+  & blockquote {
+    max-width: calc(45rem);
+    padding: 1.5em 2.5em;
+    border-left: 3px solid var(--gray);
+    margin: 0 0 1.5em;
+    background-color: var(--gray--50);
+    border-radius: 4px;
+    box-shadow: var(--box-shadow--active);
+
+    @nest [data-darkmode='true'] & {
+      box-shadow: none;
+    }
+  }
+
+  & blockquote > p:last-child {
+    margin-bottom: 0;
+  }
+
+  & blockquote > footer,
+  & blockquote > cite {
+    display: block;
+    font-size: 0.75em;
+  }
+
+  /* code */
+  & pre {
+    margin: 1.5em 0;
+    white-space: pre-wrap;
+  }
+
+  & p code {
+    line-break: loose;
+    overflow-wrap: break-word;
+  }
+
+  /* tables */
+  & table {
+    width: 100%;
+    margin-top: 3em;
+    margin-bottom: 3em;
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-shadow: var(--box-shadow--active);
+    font-size: 14px;
+
+    @nest [data-darkmode='true'] & {
+      box-shadow: none;
+    }
+  }
+
+  & table caption {
+    margin-bottom: 0.625em;
+    font-size: 0.75em;
+    text-align: left;
+  }
+
+  & table td,
+  & table th {
+    padding: 0.4em 0.8em;
+    border: 1px solid var(--gray--200);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  & table th {
+    font-weight: 400;
+  }
+
+  & table thead td,
+  & table thead th {
+    border-bottom-width: 2px;
+    vertical-align: bottom;
+  }
+
+  /* definition lists */
+  & dl {
+    /* max-width: 50rem; */
+    margin: 0 0 1.5em;
+  }
+
+  & dl dt {
+    font-weight: bolder;
+  }
+
+  & dl dd {
+    margin: 0 0 1.5em;
+  }
+
+  /* other tags */
+  & hr {
+    border: 0;
+    border-bottom: 1px solid;
+
+    /* max-width: 50rem; */
+    margin: 1.5em 0;
+    opacity: 0.1;
+  }
+
+  & abbr {
+    margin-right: -0.05em;
+    letter-spacing: 0.05em;
+  }
+
+  & strong,
+  & b,
+  & dt {
+    font-weight: bolder;
+  }
+
+  & code,
+  & kbd,
+  & pre,
+  & samp {
+    padding: 0;
+    background-color: transparent;
+    font-family: var(--font-family--monospace);
+    font-size: 14px;
+  }
+
+  & pre:has(code) {
+    padding: 20px;
+    background-color: var(--gray--50);
+    border-radius: 4px;
+    box-shadow: var(--box-shadow--active);
+
+    @nest [data-darkmode='true'] & {
+      box-shadow: none;
+    }
+  }
+
+  & a {
+    color: var(--color--primary);
+    transition-duration: 0.3s;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes fixlists {
+    0% {
+      text-indent: -0.001em;
+    }
+
+    100% {
+      text-indent: 0;
+    }
+  }
+}

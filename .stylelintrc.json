@@ -1,0 +1,28 @@
+{
+  "ignoreFiles": ["node_modules/**", "docs/**", "dist/**"],
+  "extends": ["stylelint-config-standard", "stylelint-config-idiomatic-order"],
+  "rules": {
+    "at-rule-no-unknown": [true, { "ignoreAtRules": ["for", "each"] }],
+    "media-feature-name-no-unknown": [
+      true,
+      { "ignoreMediaFeatureNames": ["prefers-reduced-motion"] }
+    ],
+    "selector-pseudo-element-no-unknown": [
+      true,
+      { "ignorePseudoElements": ["range-thumb"] }
+    ],
+    "block-no-empty": null,
+    "no-descending-specificity": null,
+    "string-no-newline": null,
+    "color-no-hex": true,
+    "color-named": "never",
+    "custom-property-empty-line-before": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "declaration-colon-newline-after": null,
+    "declaration-empty-line-before": null,
+    "selector-type-no-unknown": [true, { "ignoreTypes": ["ymaps"] }],
+    "function-url-quotes": "always",
+    "indentation": 2,
+    "no-missing-end-of-source-newline": null
+  }
+}

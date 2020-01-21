@@ -87,10 +87,28 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "51a6":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vue_yandex_share_vue_vue_type_style_index_0_id_6002b917_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("b360");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vue_yandex_share_vue_vue_type_style_index_0_id_6002b917_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vue_yandex_share_vue_vue_type_style_index_0_id_6002b917_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vue_yandex_share_vue_vue_type_style_index_0_id_6002b917_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "8bbf":
 /***/ (function(module, exports) {
 
 module.exports = require("vue");
+
+/***/ }),
+
+/***/ "b360":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -160,12 +178,12 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4cdf79b0-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=template&id=0e5ae813&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"331a4a80-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=template&id=6002b917&scoped=true&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-yandex-share"})}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=template&id=0e5ae813&
+// CONCATENATED MODULE: ./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=template&id=6002b917&scoped=true&
 
 // CONCATENATED MODULE: ./node_modules/tslib/tslib.es6.js
 /*! *****************************************************************************
@@ -952,9 +970,13 @@ var vue_yandex_sharevue_type_script_lang_ts_VueYandexShare = /** @class */ (func
     function VueYandexShare() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         /**
+         * Адрес скрипта
+         */
+        _this.src = '//yastatic.net/share2/share.js';
+        /**
          * Инстанс виджета
          */
-        _this.widget = null;
+        _this.widget = undefined;
         return _this;
     }
     /**
@@ -964,42 +986,14 @@ var vue_yandex_sharevue_type_script_lang_ts_VueYandexShare = /** @class */ (func
         this.loadAPIScript(this.$el);
     };
     /**
-     * Подключение скрипта YandexShare
-     */
-    VueYandexShare.prototype.loadAPIScript = function (element) {
-        var _a, _b, _c;
-        return __awaiter(this, void 0, void 0, function () {
-            var src, script;
-            var _this = this;
-            return __generator(this, function (_d) {
-                // eslint-disable-next-line no-unused-expressions
-                (_c = (_a = this.widget) === null || _a === void 0 ? void 0 : (_b = _a).destroy) === null || _c === void 0 ? void 0 : _c.call(_b);
-                src = '//yastatic.net/share2/share.js';
-                if (!document.querySelectorAll("[src*='" + src + "']").length) {
-                    script = document.createElement('script');
-                    script.setAttribute('src', '//yastatic.net/share2/share.js');
-                    document.body.appendChild(script);
-                    script.onload = function () {
-                        _this.$emit('load');
-                        _this.initialize(element);
-                    };
-                    script.onerror = function (error) {
-                        _this.$emit('error', error);
-                    };
-                }
-                else {
-                    this.initialize(element);
-                }
-                return [2 /*return*/];
-            });
-        });
-    };
-    /**
      * Инициализация виджета
+     *
+     * @param element
      */
     VueYandexShare.prototype.initialize = function (element) {
         var _this = this;
-        this.widget = window.Ya.share2(element, {
+        var _a, _b, _c;
+        this.widget = (_c = (_a = window.Ya) === null || _a === void 0 ? void 0 : (_b = _a).share2) === null || _c === void 0 ? void 0 : _c.call(_b, element, {
             content: {
                 url: this.url || window.location.href,
                 title: this.title || document.title,
@@ -1028,6 +1022,51 @@ var vue_yandex_sharevue_type_script_lang_ts_VueYandexShare = /** @class */ (func
                 },
             },
         });
+    };
+    /**
+     * Ижидание загрузки скрипта
+     *
+     * @param element
+     */
+    VueYandexShare.prototype.pollingScriptLoad = function (element) {
+        var _this = this;
+        var pollInterval = setInterval(function () {
+            if (window.Ya) {
+                _this.initialize(element);
+                clearInterval(pollInterval);
+            }
+        }, 300);
+        setTimeout(function () {
+            clearInterval(pollInterval);
+        }, 10000);
+    };
+    /**
+     * Подключение скрипта YandexShare
+     *
+     * @param element
+     */
+    VueYandexShare.prototype.loadAPIScript = function (element) {
+        var _this = this;
+        var _a, _b, _c;
+        // eslint-disable-next-line no-unused-expressions
+        (_c = (_a = this.widget) === null || _a === void 0 ? void 0 : (_b = _a).destroy) === null || _c === void 0 ? void 0 : _c.call(_b);
+        if (!document.querySelectorAll("[src*='" + this.src + "']").length) {
+            var script = document.createElement('script');
+            script.setAttribute('src', this.src);
+            script.setAttribute('async', 'true');
+            script.setAttribute('defer', 'true');
+            document.body.appendChild(script);
+            script.onload = function () {
+                _this.$emit('load');
+                _this.initialize(element);
+            };
+            script.onerror = function (error) {
+                _this.$emit('error', error);
+            };
+        }
+        else {
+            this.pollingScriptLoad(element);
+        }
     };
     VueYandexShare.prototype.mounted = function () {
         this.loadAPIScript(this.$el);
@@ -1185,6 +1224,9 @@ var vue_yandex_sharevue_type_script_lang_ts_VueYandexShare = /** @class */ (func
 
 // CONCATENATED MODULE: ./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=script&lang=ts&
  /* harmony default export */ var vue_yandex_share_vue_yandex_sharevue_type_script_lang_ts_ = (vue_yandex_sharevue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=style&index=0&id=6002b917&lang=postcss&scoped=true&
+var vue_yandex_sharevue_type_style_index_0_id_6002b917_lang_postcss_scoped_true_ = __webpack_require__("51a6");
+
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
 
@@ -1286,6 +1328,7 @@ function normalizeComponent (
 
 
 
+
 /* normalize component */
 
 var component = normalizeComponent(
@@ -1294,7 +1337,7 @@ var component = normalizeComponent(
   staticRenderFns,
   false,
   null,
-  null,
+  "6002b917",
   null
   
 )

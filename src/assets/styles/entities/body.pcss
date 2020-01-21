@@ -1,0 +1,16 @@
+body {
+  background-color: var(--white);
+  -webkit-overflow-scrolling: touch;
+
+  @nest [data-darkmode='true'] & {
+    background-color: var(--black);
+    filter: var(--filter-darkmode);
+
+    & img,
+    & .nuxt__build_indicator,
+    & #webpack-hot-middleware-clientOverlay,
+    & [ignore-darkmode] {
+      filter: var(--filter-darkmode--reverse);
+    }
+  }
+}

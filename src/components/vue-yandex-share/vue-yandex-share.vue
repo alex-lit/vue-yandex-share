@@ -4,6 +4,16 @@
   @Component<VueYandexShare>({})
   export default class VueYandexShare extends Vue {
     /**
+     * Адрес скрипта
+     */
+    src: string = '//yastatic.net/share2/share.js';
+
+    /**
+     * Инстанс виджета
+     */
+    widget: { [key: string]: any } | undefined = undefined;
+
+    /**
      * Токен для снятия ограничения запросов на получение счетчика. Актуален и
      * работает только для Facebook
      */
@@ -205,16 +215,6 @@
     private contentByService!: { [key: string]: any };
 
     /**
-     * Адрес скрипта
-     */
-    src: string = '//yastatic.net/share2/share.js';
-
-    /**
-     * Инстанс виджета
-     */
-    widget: { [key: string]: any } | undefined = undefined;
-
-    /**
      * При изменении входных параметров переподключает виджет
      */
     @Watch('$props', { deep: true })
@@ -224,6 +224,8 @@
 
     /**
      * Инициализация виджета
+     *
+     * @param element
      */
     initialize(element: Element | string) {
       this.widget = (window as any).Ya?.share2?.(element, {
@@ -259,6 +261,8 @@
 
     /**
      * Ижидание загрузки скрипта
+     *
+     * @param element
      */
     pollingScriptLoad(element: Element | string) {
       const pollInterval = setInterval(() => {
@@ -274,6 +278,8 @@
 
     /**
      * Подключение скрипта YandexShare
+     *
+     * @param element
      */
     loadAPIScript(element: Element | string) {
       // eslint-disable-next-line no-unused-expressions
@@ -313,6 +319,7 @@
   .vue-yandex-share {
     transition-duration: 0.3s;
   }
+
   .vue-yandex-share:empty {
     opacity: 0;
   }

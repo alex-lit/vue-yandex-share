@@ -1,15 +1,16 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator';
-  // @ts-ignore
   import { VueGithubCorners } from 'vue2-github-corners';
+
   import VueYandexShare from '@/components/vue-yandex-share';
+  import WrapperDemo from '@/components/wrapper-demo';
 
   @Component<App>({
-    components: { VueYandexShare, VueGithubCorners },
+    components: { VueYandexShare, VueGithubCorners, WrapperDemo },
   })
   export default class App extends Vue {
     /**
-     * Параметры плагина
+     * Параметры компонента VueYandexShare
      */
     options: { [key: string]: any } = {
       accessToken: null,
@@ -55,6 +56,10 @@
         'whatsapp',
       ],
     };
+
+    mounted() {
+      console.log(process.env.npm_package_version);
+    }
   }
 </script>
 
@@ -62,23 +67,15 @@
   <main class="app">
     <vue-github-corners
       repo-url="//github.com/alex-lit/vue-yandex-share"
-      cat-color="#ffffff"
-      bg-color="#1A237E"
+      cat-color="var(--white)"
+      bg-color="var(--amber--900)"
     ></vue-github-corners>
 
-    <section class="app__container">
-      <article class="app__widget-wrapper">
-        <div class="app__widget-container">
-          <vue-yandex-share v-bind="options"></vue-yandex-share>
-        </div>
-      </article>
+    <wrapper-demo>
+      <vue-yandex-share v-bind="options"></vue-yandex-share>
 
-      <aside class="app__widget-config">
-        <el-divider content-position="left">
-          <i class="el-icon-s-operation"></i>
-          Параметры
-        </el-divider>
-        <el-form size="mini" label-position="top" class="app__form">
+      <template #config>
+        <el-form size="mini" label-position="top">
           <!-- services -->
           <el-form-item :label="`Список поддерживаемых соцсетей`">
             <el-select v-model="options.services" multiple :popper-append-to-body="false">
@@ -256,85 +253,34 @@
           </el-form-item>
           <!-- /accessToken -->
         </el-form>
-      </aside>
-    </section>
+      </template>
+    </wrapper-demo>
   </main>
 </template>
 
-<style lang="postcss">
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-</style>
-
 <style lang="postcss" scoped>
   .app {
-    background-color: #f5f5f5;
     min-width: 800px;
-  }
-  .app__container {
-    display: grid;
-    grid-template-columns: 1fr 400px;
-    max-height: 100vh;
-  }
-  .app__widget-wrapper {
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    max-height: inherit;
-    overflow: auto;
-  }
-
-  .app__widget-container {
-    width: 100%;
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .app__widget-config {
-    background-color: #f5f5f5;
-    padding: 40px;
-    max-height: inherit;
-    overflow: auto;
-    filter: hue-rotate(-180deg) invert(1) contrast(1);
-    box-shadow: -5px 8px 20px rgba(0, 0, 0, 0.05);
-  }
-
-  .app__form {
-    display: grid;
   }
 </style>
 
 <style lang="postcss" scoped>
   .github-corners {
-    z-index: 100;
     position: sticky;
+    z-index: 100;
     top: 0;
     right: 0;
   }
 </style>
 
 <style lang="postcss" scoped>
-  .vue-yandex-share {
-    position: sticky;
-    top: 40px;
+  .el-form {
+    display: grid;
   }
 </style>
 
 <style lang="postcss" scoped>
   .el-select {
     width: 100%;
-  }
-</style>
-
-<style lang="postcss" scoped>
-  .el-divider {
-    & .el-divider__text {
-      background-color: #f5f5f5;
-    }
   }
 </style>

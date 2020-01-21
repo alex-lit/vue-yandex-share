@@ -1,0 +1,24 @@
+:root {
+  /* color */
+  --color--danger: var(--red);
+  --color--primary: var(--indigo);
+  --color--success: var(--green);
+  --color--warning: var(--orange);
+
+  /* box-shadow */
+  --box-shadow--active: 5px 8px 20px rgba(0, 0, 0, 0.05);
+  --box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+
+  /* filter-darkmode */
+  --filter-darkmode--reverse: hue-rotate(-180deg) invert(1) contrast(1);
+  --filter-darkmode: hue-rotate(180deg) invert(1) contrast(0.9);
+
+  /* font-family */
+  --font-family: 'Segoe UI', system-ui;
+  --font-family--monospace: 'Cascadia Code', monospace;
+}
+
+/* custom-media */
+@custom-media --laptop (width > 1240px);
+@custom-media --tablet (width <= 1240px);
+@custom-media --mobile (width <= 640px);

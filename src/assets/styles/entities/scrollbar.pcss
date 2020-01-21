@@ -1,0 +1,32 @@
+::-webkit-scrollbar {
+  position: absolute;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  cursor: grab;
+  opacity: 0.5;
+}
+
+::-webkit-scrollbar-track {
+  background-color: color-mod(var(--red) alpha(0.2));
+  box-shadow: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: color-mod(var(--green) alpha(0.4));
+  border-radius: 3px;
+  transition-duration: 0.3s;
+}
+
+[data-engine-name='Gecko'] {
+  scrollbar-color: color-mod(var(--gray--500) alpha(0.4))
+    color-mod(var(--white) alpha(0.2));
+}
+
+[data-platform-type='mobile'] {
+  ::-webkit-scrollbar,
+  ::-webkit-scrollbar-track,
+  ::-webkit-scrollbar-thumb {
+    display: none;
+  }
+}
