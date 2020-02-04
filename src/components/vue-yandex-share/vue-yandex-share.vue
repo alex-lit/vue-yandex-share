@@ -260,7 +260,7 @@
     }
 
     /**
-     * Ижидание загрузки скрипта
+     * Ожидание загрузки скрипта
      *
      * @param element
      */
@@ -318,9 +318,9 @@
 <style lang="postcss" scoped>
   .vue-yandex-share {
     transition-duration: 0.3s;
-  }
 
-  .vue-yandex-share:empty {
-    opacity: 0;
+    &:empty {
+      opacity: 0;
+    }
   }
 </style>
