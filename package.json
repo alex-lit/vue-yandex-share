@@ -2,7 +2,7 @@
   "name": "@alexlit/vue-yandex-share",
   "main": "./dist/vue-yandex-share.common.js",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Vue Yandex Share component",
   "repository": {
     "type": "git",
