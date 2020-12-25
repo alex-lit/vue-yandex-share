@@ -1,13 +1,8 @@
 {
   "name": "@alexlit/vue-yandex-share",
-  "main": "./dist/vue-yandex-share.common.js",
-  "private": false,
   "version": "1.0.3",
+  "private": false,
   "description": "Vue Yandex Share component",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/alex-lit/vue-yandex-share.git"
-  },
   "keywords": [
     "vue",
     "yandex",
@@ -18,10 +13,15 @@
     "buttons",
     "component"
   ],
-  "license": "MIT",
+  "homepage": "https://github.com/alex-lit/vue-yandex-share#readme",
   "bugs": {
     "url": "https://github.com/alex-lit/vue-yandex-share/issues"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alex-lit/vue-yandex-share.git"
+  },
+  "license": "MIT",
   "author": "Alexey Litovchenko",
   "maintainers": [
     {
@@ -30,120 +30,81 @@
       "url": "https://alexlit.gitlab.io"
     }
   ],
-  "homepage": "https://github.com/alex-lit/vue-yandex-share#readme",
-  "scripts": {
-    "serve": "vue-cli-service serve & chokidar './src/**/*.vue' -c \"if [ '{event}' = 'change' ]; then stylelint {path} --fix; fi;\"",
-    "build": "cross-env OUTPUT_DIR=docs vue-cli-service build & npm run build:lib",
-    "build:lib": "vue-cli-service build --target lib --name vue-yandex-share ./src/components/vue-yandex-share/vue-yandex-share.vue",
-    "lint": "vue-cli-service lint",
-    "eslint": "eslint --ext .js,.ts,.vue ./src --fix",
-    "stylelint": "stylelint 'src/**/*.css' 'src/**/*.pcss' 'src/**/*.vue' --fix",
-    "up": "npx npm-check-updates -u & npm i",
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md"
-  },
+  "main": "./dist/vue-yandex-share.common.js",
   "files": [
     "src/components/vue-yandex-share/*",
     "dist/*"
   ],
-  "dependencies": {
-    "@alexlit/css-material-color-palette-variables": "^1.0.5",
-    "bowser": "^2.9.0",
-    "css-has-pseudo": "^1.0.0",
-    "element-ui": "^2.13.1",
-    "normalize.css": "^8.0.1",
-    "vue": "^2.6.11",
-    "vue-class-component": "^7.2.3",
-    "vue-property-decorator": "^8.4.2",
-    "vue2-github-corners": "^0.1.12"
+  "scripts": {
+    "build": "./scripts/build.sh",
+    "dev": "./scripts/dev.sh",
+    "lint": "./scripts/lint.sh",
+    "lint:eslint": "./scripts/lint.eslint.sh",
+    "lint:stylelint": "./scripts/lint.stylelint.sh",
+    "semver": "./scripts/semver.sh",
+    "test": "./scripts/test.sh",
+    "up": "./scripts/up.sh",
+    "version": "./scripts/version.sh"
   },
-  "devDependencies": {
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
-    "@typescript-eslint/eslint-plugin": "^2.30.0",
-    "@typescript-eslint/parser": "^2.30.0",
-    "@vue/cli-plugin-eslint": "^4.3.1",
-    "@vue/cli-plugin-typescript": "^4.3.1",
-    "@vue/cli-service": "^4.3.1",
-    "@vue/eslint-config-airbnb": "^5.0.2",
-    "@vue/eslint-config-typescript": "^5.0.2",
-    "chokidar-cli": "^2.1.0",
-    "commitizen": "^4.0.4",
-    "conventional-changelog-cli": "^2.0.31",
-    "cq-prolyfill": "^0.4.0",
-    "cross-env": "^7.0.2",
-    "cz-conventional-changelog": "^3.1.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-import-resolver-alias": "^1.1.2",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jest": "^23.8.2",
-    "eslint-plugin-jsdoc": "^24.0.0",
-    "eslint-plugin-prettier": "^3.1.3",
-    "eslint-plugin-simple-import-sort": "^5.0.3",
-    "eslint-plugin-sonarjs": "^0.5.0",
-    "eslint-plugin-vue": "^6.2.2",
-    "husky": "^4.2.5",
-    "lint-staged": "^10.2.0",
-    "postcss-color-mod-function": "^3.0.3",
-    "postcss-each": "^0.10.0",
-    "postcss-for": "^2.1.1",
-    "postcss-html": "^0.36.0",
-    "postcss-import": "^12.0.1",
-    "postcss-nested": "^4.2.1",
-    "postcss-object-fit-images": "^1.1.2",
-    "postcss-preset-env": "^6.7.0",
-    "prettier": "^2.0.5",
-    "prettier-stylelint": "^0.4.2",
-    "stylelint": "^13.3.3",
-    "stylelint-config-idiomatic-order": "^8.1.0",
-    "stylelint-config-standard": "^20.0.0",
-    "typescript": "~3.8.3",
-    "vue-template-compiler": "^2.6.11"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": "eslint --fix",
+    "*.{vue,pcss,scss,sass,css}": "stylelint --fix"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-push": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.js": [
-      "prettier --write",
-      "npm run eslint",
-      "git add"
-    ],
-    "src/**/*.ts": [
-      "prettier --write",
-      "npm run eslint",
-      "git add"
-    ],
-    "src/**/*.vue": [
-      "prettier --write",
-      "npm run eslint",
-      "npm run stylelint",
-      "git add"
-    ],
-    "src/**/*.css": [
-      "npm run stylelint",
-      "git add"
-    ],
-    "src/**/*.pcss": [
-      "npm run stylelint",
-      "git add"
-    ],
-    "*.md": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.json": [
-      "prettier --write",
-      "git add"
-    ]
+  "dependencies": {},
+  "devDependencies": {
+    "@alexlit/css-material-color-palette-variables": "^1.0.5",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@nuxtjs/eslint-config": "^5.0.0",
+    "@nuxtjs/eslint-config-typescript": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.11.0",
+    "@typescript-eslint/parser": "^4.11.0",
+    "@vue/cli-plugin-babel": "~4.5.9",
+    "@vue/cli-plugin-typescript": "~4.5.9",
+    "@vue/cli-service": "^4.5.9",
+    "@vue/test-utils": "^1.1.2",
+    "conventional-changelog-cli": "^2.1.1",
+    "cross-env": "^7.0.3",
+    "element-ui": "^2.14.1",
+    "eslint": "^7.16.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-jsdoc": "^30.7.9",
+    "eslint-plugin-nuxt": "^2.0.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-sonarjs": "^0.5.0",
+    "eslint-plugin-vue": "^7.3.0",
+    "eslint-plugin-vuetify": "^1.0.0-beta.7",
+    "husky": "^4.3.6",
+    "lint-staged": "^10.5.3",
+    "node-sass": "^5.0.0",
+    "postcss-preset-env": "^6.7.0",
+    "prettier": "^2.2.1",
+    "prettier-plugin-packagejson": "^2.2.8",
+    "prettier-plugin-sh": "^0.6.0",
+    "sass-loader": "^10.1.0",
+    "stylelint": "^13.8.0",
+    "stylelint-config-idiomatic-order": "^8.1.0",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-prettier": "^1.1.2",
+    "stylelint-scss": "^3.18.0",
+    "stylelint-use-nesting": "^3.0.0",
+    "typescript": "~4.1.3",
+    "vue": "^2.6.12",
+    "vue-class-component": "^7.2.6",
+    "vue-property-decorator": "^9.1.2",
+    "vue-template-compiler": "^2.6.12",
+    "vue2-github-corners": "^0.1.12"
   }
 }

@@ -1,28 +1,44 @@
 <script lang="ts">
   import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
 
-  @Component<VueYandexShare>({})
+  import {
+    COLOR_SCHEMES,
+    COPY_POSITIONS,
+    DIRECTIONS,
+    LANGUAGES,
+    MORE_BUTTON_TYPES,
+    POPUP_DIRECTIONS,
+    POPUP_POSITIONS,
+    SERVICES,
+    SHAPES,
+    SIZES,
+  } from './vue-yandex-share.consts';
+
+  @Component<VueYandexShare>({
+    mounted() {
+      this.loadAPIScript(this.$el);
+    },
+  })
   export default class VueYandexShare extends Vue {
     /**
      * Адрес скрипта
+     *
      */
-    src: string = '//yastatic.net/share2/share.js';
+    private src: string = '//yastatic.net/share2/share.js';
 
     /**
      * Инстанс виджета
      */
-    widget: { [key: string]: any } | undefined = undefined;
-
-    /**
-     * Токен для снятия ограничения запросов на получение счетчика. Актуален и
-     * работает только для Facebook
-     */
-    @Prop({ type: String })
-    private accessToken!: string;
+    private widget: Record<string, any> | undefined = undefined;
 
     /**
      * Признак того, что загрузка стилей отключена. Если добавить атрибут,
      * соцсети будут отображаться в виде текстового вертикального списка
+     *
+     * @example
+     * ```html
+     * <vue-yandex-share bare></vue-yandex-share>
+     * ```
      */
     @Prop({
       type: Boolean,
@@ -31,29 +47,57 @@
     private bare!: boolean;
 
     /**
-     * Признак того, что на кнопке соцсети отображается счетчик публикаций
+     * Цветовая схема кнопок соцсетей
      */
     @Prop({
-      type: Boolean,
-      default: false,
+      type: String,
+      default: 'normal',
+      validator(value) {
+        return COLOR_SCHEMES.includes(value);
+      },
     })
-    private counter!: boolean;
+    private colorScheme!: typeof COLOR_SCHEMES[number];
 
     /**
-     * Позиция кнопки Скопировать ссылку. Кнопка Скопировать ссылку может
-     * отображаться, если используется параметр limit
+     * Позиция кнопки **Скопировать ссылку**. Кнопка Скопировать ссылку может
+     * отображаться, если используется параметр `limit`
+     *
+     * @example
+     * ```html
+     * <vue-yandex-share copy="last"></vue-yandex-share>
+     * ```
      */
     @Prop({
       type: String,
       default: 'last',
       validator(value) {
-        return ['first', 'last', 'hidden'].includes(value);
+        return COPY_POSITIONS.includes(value);
       },
     })
-    private copy!: 'first' | 'last' | 'hidden';
+    private copy!: typeof COPY_POSITIONS[number];
+
+    /**
+     * Указание на мобильных устройствах вместо pop-up выводить окно, похожее на
+     * нативный инструмент **Поделиться**.
+     *
+     * @example
+     * ```html
+     * <vue-yandex-share curtain></vue-yandex-share>
+     * ```
+     */
+    @Prop({
+      type: Boolean,
+      default: true,
+    })
+    private curtain!: boolean;
 
     /**
      * Текст, которым нужно поделиться
+     *
+     * @example
+     * ```html
+     * <vue-yandex-share description="Заходите на мой сайт!"></vue-yandex-share>
+     * ```
      */
     @Prop({
       type: String,
@@ -67,13 +111,22 @@
       type: String,
       default: 'horizontal',
       validator(value) {
-        return ['horizontal', 'vertical'].includes(value);
+        return DIRECTIONS.includes(value);
       },
     })
-    private direction!: 'horizontal' | 'vertical';
+    private direction!: typeof DIRECTIONS[number];
 
     /**
      * Хэштеги. Актуальны и работают только для Твиттера
+     *
+     * @description
+     * Строка, указывается без знака #. Несколько хэштегов
+     * указываются через запятую, без пробела.
+     *
+     * @example
+     * ```html
+     * <vue-yandex-share hashtags="vuethebest,reactnoway"></vue-yandex-share>
+     * ```
      */
     @Prop({
       type: String,
@@ -96,21 +149,49 @@
       type: String,
       default: 'ru',
       validator(value) {
-        return ['az', 'be', 'en', 'hy', 'ka', 'kk', 'ro', 'ru', 'tr', 'tt', 'uk'].includes(value);
+        return LANGUAGES.includes(value);
       },
     })
-    private lang!: 'az' | 'be' | 'en' | 'hy' | 'ka' | 'kk' | 'ro' | 'ru' | 'tr' | 'tt' | 'uk';
+    private lang!: typeof LANGUAGES[number];
 
     /**
      * Количество соцсетей, отображаемых в виде кнопок. Используется если нужно
      * встроить в блок много соцсетей, а также чтобы блок занимал мало места на
      * странице. Не вошедшие в лимит соцсети будут отображаться в pop-up по
-     * нажатию кнопки
+     * нажатию кнопки `***`
      */
     @Prop({
       type: Number,
+      validator(value) {
+        return value >= 0 && value <= SERVICES.length;
+      },
     })
     private limit!: number;
+
+    /**
+     * Вид кнопки открытия pop-up, если значение `limit` равно `0`.
+     */
+    @Prop({
+      type: String,
+      default: null,
+      validator(value) {
+        return MORE_BUTTON_TYPES.includes(value);
+      },
+    })
+    private moreButtonType!: typeof MORE_BUTTON_TYPES[number];
+
+    /**
+     * Идентификатор директивы
+     * [Content Security Policy](https://www.w3.org/TR/CSP3/).
+     * Используется для подтверждения безопасности скрипта блока «Поделиться».
+     *
+     * @description
+     * Строка, сгенерированная сервером.
+     */
+    @Prop({
+      type: String,
+    })
+    private nonce!: string;
 
     /**
      * Направление открытия pop-up
@@ -119,10 +200,10 @@
       type: String,
       default: 'bottom',
       validator(value) {
-        return ['bottom', 'top'].includes(value);
+        return POPUP_DIRECTIONS.includes(value);
       },
     })
-    private popupDirection!: 'bottom' | 'top';
+    private popupDirection!: typeof POPUP_DIRECTIONS[number];
 
     /**
      * Расположение pop-up относительно контейнера блока. Значение outer может
@@ -133,10 +214,33 @@
       type: String,
       default: 'inner',
       validator(value) {
-        return ['inner', 'outer'].includes(value);
+        return POPUP_POSITIONS.includes(value);
       },
     })
-    private popupPosition!: 'inner' | 'outer';
+    private popupPosition!: typeof POPUP_POSITIONS[number];
+
+    /**
+     * Список идентификаторов социальных сетей, отображаемых в блоке.
+     */
+    @Prop({
+      type: Array,
+      default() {
+        return ['facebook', 'telegram', 'twitter', 'vkontakte'];
+      },
+    })
+    private services!: typeof SERVICES[number][];
+
+    /**
+     * Форма кнопок соцсетей.
+     */
+    @Prop({
+      type: Array,
+      default: 'normal',
+      validator(value) {
+        return SHAPES.includes(value);
+      },
+    })
+    private shape!: typeof SHAPES[number][];
 
     /**
      * Размер кнопок соцсетей
@@ -145,10 +249,10 @@
       type: String,
       default: 'm',
       validator(value) {
-        return ['m', 's'].includes(value);
+        return SIZES.includes(value);
       },
     })
-    private size!: 'm' | 's';
+    private size!: typeof SIZES[number];
 
     /**
      * Заголовок, которым нужно поделиться
@@ -167,44 +271,35 @@
     private url!: string;
 
     /**
-     * Список поддерживаемых соцсетей
+     * Указание, что страницу отправки ссылки нужно всегда открывать в новом
+     * окне или вкладке. Если атрибут не добавлять, страница может выводиться во
+     * всплывающем окне (возможность зависит от соцсети и браузера).
      */
     @Prop({
-      type: Array,
-      default() {
-        return [
-          'blogger',
-          'delicious',
-          'digg',
-          'evernote',
-          'facebook',
-          'gplus',
-          'linkedin',
-          'lj',
-          'moimir',
-          'odnoklassniki',
-          'pinterest',
-          'pocket',
-          'qzone',
-          'reddit',
-          'renren',
-          'sinaWeibo',
-          'skype',
-          'surfingbird',
-          'telegram',
-          'tencentWeibo',
-          'tumblr',
-          'twitter',
-          'viber',
-          'vkontakte',
-          'whatsapp',
-        ];
-      },
+      type: Boolean,
+      default: false,
     })
-    private services!: string[];
+    private useLinks!: boolean;
 
     /**
      * Параметры контента для каждой соцсети отдельно
+     *
+     * @example
+     * ```html
+     * <vue-yandex-share :contentByService="{
+     *   twitter: {
+     *     url: 'https://ya.ru',
+     *     title: 'Яндекс',
+     *     hashtags: 'yandex,share'
+     *   },
+     *   facebook: {
+     *     url: 'https://ya.ru',
+     *     title: 'Яндекс',
+     *     accessToken: 'fb-token'
+     *   }
+     * }"
+     * ></vue-yandex-share>
+     * ```
      */
     @Prop({
       type: Object,
@@ -212,7 +307,7 @@
         return {};
       },
     })
-    private contentByService!: { [key: string]: any };
+    private contentByService!: Record<string, any>;
 
     /**
      * При изменении входных параметров переподключает виджет
@@ -230,23 +325,28 @@
     initialize(element: Element | string) {
       this.widget = (window as any).Ya?.share2?.(element, {
         content: {
-          url: this.url || window.location.href,
-          title: this.title || document.title,
           description: this.description,
           image: this.image,
+          title: this.title || document.title,
+          url: this.url || window.location.href,
         },
         contentByService: this.contentByService,
         theme: {
           bare: this.bare,
+          colorScheme: this.colorScheme,
           copy: this.copy,
-          counter: this.counter,
+          curtain: this.curtain,
           direction: this.direction,
           lang: this.lang,
           limit: this.limit,
+          moreButtonType: this.moreButtonType,
+          nonce: this.nonce,
           popupDirection: this.popupDirection,
           popupPosition: this.popupPosition,
           services: this.services.join(','),
+          shape: this.shape,
           size: this.size,
+          useLinks: this.useLinks,
         },
         hooks: {
           onready: () => {
@@ -297,16 +397,12 @@
           this.$emit('load');
           this.initialize(element);
         };
-        script.onerror = error => {
+        script.onerror = (error) => {
           this.$emit('error', error);
         };
       } else {
         this.pollingScriptLoad(element);
       }
-    }
-
-    mounted() {
-      this.loadAPIScript(this.$el);
     }
   }
 </script>
@@ -315,7 +411,7 @@
   <div class="vue-yandex-share"></div>
 </template>
 
-<style lang="postcss" scoped>
+<style lang="scss" scoped>
   .vue-yandex-share {
     transition-duration: 0.3s;
 

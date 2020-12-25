@@ -1,39 +1,31 @@
 module.exports = {
   root: true,
+
   env: {
+    browser: true,
     node: true,
   },
+
   extends: [
-    'plugin:vue/recommended',
-    '@vue/airbnb',
-    '@vue/typescript',
-    'plugin:import/recommended',
+    '@nuxtjs/eslint-config-typescript',
+    'plugin:nuxt/recommended',
+    'plugin:import/typescript',
     'plugin:jsdoc/recommended',
     'plugin:sonarjs/recommended',
-
     'prettier',
-    'plugin:prettier/recommended',
+    'prettier/@typescript-eslint',
     'prettier/vue',
   ],
-  plugins: ['import', 'simple-import-sort', '@typescript-eslint', 'jsdoc', 'sonarjs', 'prettier'],
+
+  plugins: ['vue', 'prettier', 'sonarjs', 'jsdoc', 'simple-import-sort'],
+
+  ignorePatterns: ['sw.js'],
+
   rules: {
-    'no-underscore-dangle': 'off',
     'no-console': 'off',
-    'no-debugger': 'off',
-    'no-shadow': 'off',
-    'global-require': 'off',
-    'class-methods-use-this': 'off',
-    'implicit-arrow-linebreak': 'off',
-    'no-param-reassign': 'off',
-    'simple-import-sort/sort': 'error',
-    'standard/computed-property-even-spacing': 'off',
-    'standard/no-callback-literal': 'off',
-    'prettier/prettier': ['error'],
-    'import/no-extraneous-dependencies': 'off',
-    'import/prefer-default-export': 'off',
-    'import/no-dynamic-require': 'off',
-    'import/extensions': 'off',
-    'sonarjs/no-duplicate-string': 'off',
+    'no-use-before-define': 'off',
+
+    // jsdoc
     'jsdoc/no-undefined-types': 'off',
     'jsdoc/require-param-type': 'off',
     'jsdoc/require-param-description': 'off',
@@ -41,20 +33,29 @@ module.exports = {
     'jsdoc/require-returns-type': 'off',
     'jsdoc/require-returns-description': 'off',
     'jsdoc/require-jsdoc': [
-      1,
+      'warn',
       {
         require: {
+          ArrowFunctionExpression: false,
           ClassDeclaration: false,
           ClassExpression: false,
           FunctionDeclaration: true,
           FunctionExpression: false,
-          MethodDefinition: false,
+          MethodDefinition: true,
         },
       },
     ],
-    // '@typescript-eslint/no-unused-vars': [2, { args: 'none' }],
+
+    // prettier
+    'prettier/prettier': 'error',
+
+    // simple-import-sort
+    'simple-import-sort/imports': 'warn',
+    'simple-import-sort/exports': 'warn',
+
+    // typescript
     '@typescript-eslint/member-ordering': [
-      2,
+      'warn',
       {
         default: [
           'public-static-field',
@@ -95,19 +96,14 @@ module.exports = {
         ],
       },
     ],
-    'vue/component-tags-order': ['error'],
-    'vue/no-deprecated-scope-attribute': ['error'],
-    'vue/no-deprecated-slot-attribute': ['warn'],
-    'vue/no-deprecated-slot-scope-attribute': ['error'],
-    'vue/match-component-file-name': ['error'],
-    'vue/no-reserved-component-names': ['error'],
-    'vue/no-unsupported-features': ['error'],
-    'vue/static-class-names-order': ['error'],
-    'vue/valid-v-bind-sync': ['error'],
-    'vue/valid-v-slot': ['error'],
-    'vue/eqeqeq': ['error'],
-    'vue/no-irregular-whitespace': ['error'],
-    'vue/no-unused-components': ['error'],
+
+    // vue
+    'vue/attributes-order': [
+      'error',
+      {
+        alphabetical: true,
+      },
+    ],
     'vue/component-name-in-template-casing': [
       'error',
       'kebab-case',
@@ -116,6 +112,11 @@ module.exports = {
         ignores: [],
       },
     ],
+    'vue/component-tags-order': ['error'],
+    'vue/eqeqeq': ['error'],
+    'vue/html-comment-content-newline': ['warn'],
+    'vue/html-comment-content-spacing': ['warn'],
+    'vue/html-comment-indent': ['warn'],
     'vue/html-self-closing': [
       'error',
       {
@@ -128,21 +129,22 @@ module.exports = {
         math: 'always',
       },
     ],
+    'vue/match-component-file-name': ['error'],
+    'vue/no-deprecated-scope-attribute': ['error'],
+    'vue/no-deprecated-slot-attribute': ['error'],
+    'vue/no-deprecated-slot-scope-attribute': ['error'],
+    'vue/no-irregular-whitespace': ['error'],
+    'vue/no-multiple-objects-in-class': ['error'],
+    'vue/no-potential-component-option-typo': ['error'],
+    'vue/no-reserved-component-names': ['error'],
+    'vue/no-unsupported-features': ['error'],
+    'vue/no-unused-components': ['error'],
     'vue/no-v-html': 'off',
-  },
-
-  parserOptions: {
-    parser: '@typescript-eslint/parser',
-  },
-  settings: {
-    'import/resolver': {
-      alias: {
-        map: [
-          ['@', './src'],
-          ['~', './src'],
-        ],
-        extensions: ['.js', '.ts', '.d.ts', '.vue', '.yaml', '.json', '.md', '.txt'],
-      },
-    },
+    'vue/static-class-names-order': 'off',
+    'vue/this-in-template': ['error', 'never'],
+    'vue/v-for-delimiter-style': ['error'],
+    'vue/v-on-function-call': ['error', 'always'],
+    'vue/valid-v-bind-sync': ['error'],
+    'vue/valid-v-slot': ['error'],
   },
 };

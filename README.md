@@ -34,7 +34,6 @@ npm i @alexlit/vue-yandex-share -S
         options = {
           accessToken: null,
           bare: false,
-          counter: false,
           copy: 'last',
           description: null,
           direction: 'horizontal',

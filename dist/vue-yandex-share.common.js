@@ -1004,7 +1004,6 @@ var vue_yandex_sharevue_type_script_lang_ts_VueYandexShare = /** @class */ (func
             theme: {
                 bare: this.bare,
                 copy: this.copy,
-                counter: this.counter,
                 direction: this.direction,
                 lang: this.lang,
                 limit: this.limit,
