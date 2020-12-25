@@ -1,8 +1,11 @@
 module.exports = {
   ignoreFiles: [
+    '.git/**',
     '.nuxt-storybook/**',
     '.nuxt/**',
+    'build/**',
     'dist/**',
+    'docs/**',
     'node_modules/**',
     'storybook-static/**',
   ],

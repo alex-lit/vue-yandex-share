@@ -1,2 +1,4 @@
-dist
-docs
+/.git
+/dist
+/docs
+/node_modules
