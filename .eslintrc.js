@@ -19,7 +19,14 @@ module.exports = {
 
   plugins: ['vue', 'prettier', 'sonarjs', 'jsdoc', 'simple-import-sort'],
 
-  ignorePatterns: ['sw.js'],
+  ignorePatterns: [
+    '**/.git/**',
+    '**/build/**',
+    '**/dist/**',
+    '**/docs/**',
+    '**/node_modules/**',
+    'sw.js',
+  ],
 
   rules: {
     'no-console': 'off',
