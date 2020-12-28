@@ -1,3 +1,7 @@
+## [2.0.1](https://github.com/alex-lit/vue-yandex-share/compare/v2.0.0...v2.0.1) (2020-12-28)
+
+
+
 # [2.0.0](https://github.com/alex-lit/vue-yandex-share/compare/v1.0.2...v2.0.0) (2020-12-25)
 
 
