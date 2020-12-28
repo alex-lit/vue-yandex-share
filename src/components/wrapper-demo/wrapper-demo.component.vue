@@ -3,6 +3,9 @@
 
   import { Component, Vue } from 'vue-property-decorator';
 
+  const a = 1;
+  console.log(a);
+
   @Component<WrapperDemo>({})
   export default class WrapperDemo extends Vue {}
 </script>
