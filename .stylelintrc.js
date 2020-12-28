@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ['@alexlit/config-stylelint'],
+  extends: ['@alexlit/lint-kit/.stylelintrc.js'],
 };

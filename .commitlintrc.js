@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ['@alexlit/config-commitlint'],
+  extends: ['@alexlit/lint-kit/.commitlintrc.js'],
 };

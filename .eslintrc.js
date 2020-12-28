@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ['./node_modules/@alexlit/config-eslint'],
+  extends: ['./node_modules/@alexlit/lint-kit/.eslintrc.js'],
 };
