@@ -1,1 +1,1 @@
-export { default } from './wrapper-demo.vue';
+export { default } from './wrapper-demo.component.vue';

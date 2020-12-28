@@ -82,19 +82,500 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "fb15");
+/******/ 	return __webpack_require__(__webpack_require__.s = "fae3");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "51a6":
+/***/ "24fb":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+// eslint-disable-next-line func-names
+module.exports = function (useSourceMap) {
+  var list = []; // return the list of modules as css string
+
+  list.toString = function toString() {
+    return this.map(function (item) {
+      var content = cssWithMappingToString(item, useSourceMap);
+
+      if (item[2]) {
+        return "@media ".concat(item[2], " {").concat(content, "}");
+      }
+
+      return content;
+    }).join('');
+  }; // import a list of modules into the list
+  // eslint-disable-next-line func-names
+
+
+  list.i = function (modules, mediaQuery, dedupe) {
+    if (typeof modules === 'string') {
+      // eslint-disable-next-line no-param-reassign
+      modules = [[null, modules, '']];
+    }
+
+    var alreadyImportedModules = {};
+
+    if (dedupe) {
+      for (var i = 0; i < this.length; i++) {
+        // eslint-disable-next-line prefer-destructuring
+        var id = this[i][0];
+
+        if (id != null) {
+          alreadyImportedModules[id] = true;
+        }
+      }
+    }
+
+    for (var _i = 0; _i < modules.length; _i++) {
+      var item = [].concat(modules[_i]);
+
+      if (dedupe && alreadyImportedModules[item[0]]) {
+        // eslint-disable-next-line no-continue
+        continue;
+      }
+
+      if (mediaQuery) {
+        if (!item[2]) {
+          item[2] = mediaQuery;
+        } else {
+          item[2] = "".concat(mediaQuery, " and ").concat(item[2]);
+        }
+      }
+
+      list.push(item);
+    }
+  };
+
+  return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+  var content = item[1] || ''; // eslint-disable-next-line prefer-destructuring
+
+  var cssMapping = item[3];
+
+  if (!cssMapping) {
+    return content;
+  }
+
+  if (useSourceMap && typeof btoa === 'function') {
+    var sourceMapping = toComment(cssMapping);
+    var sourceURLs = cssMapping.sources.map(function (source) {
+      return "/*# sourceURL=".concat(cssMapping.sourceRoot || '').concat(source, " */");
+    });
+    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+  }
+
+  return [content].join('\n');
+} // Adapted from convert-source-map (MIT)
+
+
+function toComment(sourceMap) {
+  // eslint-disable-next-line no-undef
+  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+  var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
+  return "/*# ".concat(data, " */");
+}
+
+/***/ }),
+
+/***/ "499e":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vue_yandex_share_vue_vue_type_style_index_0_id_6002b917_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("b360");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vue_yandex_share_vue_vue_type_style_index_0_id_6002b917_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vue_yandex_share_vue_vue_type_style_index_0_id_6002b917_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "default", function() { return /* binding */ addStylesClient; });
+
+// CONCATENATED MODULE: ./node_modules/vue-style-loader/lib/listToStyles.js
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    }
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
+    } else {
+      newStyles[id].parts.push(part)
+    }
+  }
+  return styles
+}
+
+// CONCATENATED MODULE: ./node_modules/vue-style-loader/lib/addStylesClient.js
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+var options = null
+var ssrIdKey = 'data-vue-ssr-id'
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+function addStylesClient (parentId, list, _isProduction, _options) {
+  isProduction = _isProduction
+
+  options = _options || {}
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+  if (options.ssrId) {
+    styleElement.setAttribute(ssrIdKey, obj.id)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
+
+/***/ }),
+
+/***/ "66bb":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("8175");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("499e").default
+var update = add("2b6b1ca6", content, true, {"sourceMap":false,"shadowMode":false});
+
+/***/ }),
+
+/***/ "78a5":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vue_yandex_share_component_vue_vue_type_style_index_0_id_d2ffc23a_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("66bb");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vue_yandex_share_component_vue_vue_type_style_index_0_id_d2ffc23a_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vue_yandex_share_component_vue_vue_type_style_index_0_id_d2ffc23a_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
- /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_7_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_7_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_vue_yandex_share_vue_vue_type_style_index_0_id_6002b917_lang_postcss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+
+/***/ }),
+
+/***/ "8175":
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__("24fb");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, ".vue-yandex-share[data-v-d2ffc23a]{-webkit-transition-duration:.3s;transition-duration:.3s}.vue-yandex-share[data-v-d2ffc23a]:empty{opacity:0}", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "8875":
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;// addapted from the document.currentScript polyfill by Adam Miller
+// MIT license
+// source: https://github.com/amiller-gh/currentScript-polyfill
+
+// added support for Firefox https://bugzilla.mozilla.org/show_bug.cgi?id=1620505
+
+(function (root, factory) {
+  if (true) {
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else {}
+}(typeof self !== 'undefined' ? self : this, function () {
+  function getCurrentScript () {
+    var descriptor = Object.getOwnPropertyDescriptor(document, 'currentScript')
+    // for chrome
+    if (!descriptor && 'currentScript' in document && document.currentScript) {
+      return document.currentScript
+    }
+
+    // for other browsers with native support for currentScript
+    if (descriptor && descriptor.get !== getCurrentScript && document.currentScript) {
+      return document.currentScript
+    }
+  
+    // IE 8-10 support script readyState
+    // IE 11+ & Firefox support stack trace
+    try {
+      throw new Error();
+    }
+    catch (err) {
+      // Find the second match for the "at" string to get file src url from stack.
+      var ieStackRegExp = /.*at [^(]*\((.*):(.+):(.+)\)$/ig,
+        ffStackRegExp = /@([^@]*):(\d+):(\d+)\s*$/ig,
+        stackDetails = ieStackRegExp.exec(err.stack) || ffStackRegExp.exec(err.stack),
+        scriptLocation = (stackDetails && stackDetails[1]) || false,
+        line = (stackDetails && stackDetails[2]) || false,
+        currentLocation = document.location.href.replace(document.location.hash, ''),
+        pageSource,
+        inlineScriptSourceRegExp,
+        inlineScriptSource,
+        scripts = document.getElementsByTagName('script'); // Live NodeList collection
+  
+      if (scriptLocation === currentLocation) {
+        pageSource = document.documentElement.outerHTML;
+        inlineScriptSourceRegExp = new RegExp('(?:[^\\n]+?\\n){0,' + (line - 2) + '}[^<]*<script>([\\d\\D]*?)<\\/script>[\\d\\D]*', 'i');
+        inlineScriptSource = pageSource.replace(inlineScriptSourceRegExp, '$1').trim();
+      }
+  
+      for (var i = 0; i < scripts.length; i++) {
+        // If ready state is interactive, return the script tag
+        if (scripts[i].readyState === 'interactive') {
+          return scripts[i];
+        }
+  
+        // If src matches, return the script tag
+        if (scripts[i].src === scriptLocation) {
+          return scripts[i];
+        }
+  
+        // If inline source matches, return the script tag
+        if (
+          scriptLocation === currentLocation &&
+          scripts[i].innerHTML &&
+          scripts[i].innerHTML.trim() === inlineScriptSource
+        ) {
+          return scripts[i];
+        }
+      }
+  
+      // If no match, return null
+      return null;
+    }
+  };
+
+  return getCurrentScript
+}));
+
 
 /***/ }),
 
@@ -105,100 +586,70 @@ module.exports = require("vue");
 
 /***/ }),
 
-/***/ "b360":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "f6fd":
-/***/ (function(module, exports) {
-
-// document.currentScript polyfill by Adam Miller
-
-// MIT license
-
-(function(document){
-  var currentScript = "currentScript",
-      scripts = document.getElementsByTagName('script'); // Live NodeList collection
-
-  // If browser needs currentScript polyfill, add get currentScript() to the document object
-  if (!(currentScript in document)) {
-    Object.defineProperty(document, currentScript, {
-      get: function(){
-
-        // IE 6-10 supports script readyState
-        // IE 10+ support stack trace
-        try { throw new Error(); }
-        catch (err) {
-
-          // Find the second match for the "at" string to get file src url from stack.
-          // Specifically works with the format of stack traces in IE.
-          var i, res = ((/.*at [^\(]*\((.*):.+:.+\)$/ig).exec(err.stack) || [false])[1];
-
-          // For all scripts on the page, if src matches or if ready state is interactive, return the script tag
-          for(i in scripts){
-            if(scripts[i].src == res || scripts[i].readyState == "interactive"){
-              return scripts[i];
-            }
-          }
-
-          // If no match, return null
-          return null;
-        }
-      }
-    });
-  }
-})(document);
-
-
-/***/ }),
-
-/***/ "fb15":
+/***/ "fae3":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+// ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "COLOR_SCHEMES", function() { return /* reexport */ COLOR_SCHEMES; });
+__webpack_require__.d(__webpack_exports__, "COPY_POSITIONS", function() { return /* reexport */ COPY_POSITIONS; });
+__webpack_require__.d(__webpack_exports__, "DIRECTIONS", function() { return /* reexport */ DIRECTIONS; });
+__webpack_require__.d(__webpack_exports__, "LANGUAGES", function() { return /* reexport */ LANGUAGES; });
+__webpack_require__.d(__webpack_exports__, "MORE_BUTTON_TYPES", function() { return /* reexport */ MORE_BUTTON_TYPES; });
+__webpack_require__.d(__webpack_exports__, "POPUP_DIRECTIONS", function() { return /* reexport */ POPUP_DIRECTIONS; });
+__webpack_require__.d(__webpack_exports__, "POPUP_POSITIONS", function() { return /* reexport */ POPUP_POSITIONS; });
+__webpack_require__.d(__webpack_exports__, "SERVICES", function() { return /* reexport */ SERVICES; });
+__webpack_require__.d(__webpack_exports__, "SHAPES", function() { return /* reexport */ SHAPES; });
+__webpack_require__.d(__webpack_exports__, "SIZES", function() { return /* reexport */ SIZES; });
 
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/setPublicPath.js
 // This file is imported into lib/wc client bundles.
 
 if (typeof window !== 'undefined') {
+  var currentScript = window.document.currentScript
   if (true) {
-    __webpack_require__("f6fd")
+    var getCurrentScript = __webpack_require__("8875")
+    currentScript = getCurrentScript()
+
+    // for backward compatibility, because previously we directly included the polyfill
+    if (!('currentScript' in document)) {
+      Object.defineProperty(document, 'currentScript', { get: getCurrentScript })
+    }
   }
 
-  var i
-  if ((i = window.document.currentScript) && (i = i.src.match(/(.+\/)[^/]+\.js(\?.*)?$/))) {
-    __webpack_require__.p = i[1] // eslint-disable-line
+  var src = currentScript && currentScript.src.match(/(.+\/)[^/]+\.js(\?.*)?$/)
+  if (src) {
+    __webpack_require__.p = src[1] // eslint-disable-line
   }
 }
 
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"331a4a80-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=template&id=6002b917&scoped=true&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"69ffcdbf-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vue-yandex-share/vue-yandex-share.component.vue?vue&type=template&id=d2ffc23a&scoped=true&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"vue-yandex-share"})}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=template&id=6002b917&scoped=true&
+// CONCATENATED MODULE: ./src/components/vue-yandex-share/vue-yandex-share.component.vue?vue&type=template&id=d2ffc23a&scoped=true&
 
 // CONCATENATED MODULE: ./node_modules/tslib/tslib.es6.js
 /*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
+Copyright (c) Microsoft Corporation.
 
-THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
 
-See the Apache Version 2.0 License for specific language governing permissions
-and limitations under the License.
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
 /* global Reflect, Promise */
 
@@ -254,10 +705,11 @@ function __metadata(metadataKey, metadataValue) {
 }
 
 function __awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 }
@@ -290,19 +742,25 @@ function __generator(thisArg, body) {
     }
 }
 
+function __createBinding(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}
+
 function __exportStar(m, exports) {
-    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+    for (var p in m) if (p !== "default" && !exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 
 function __values(o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
     if (m) return m.call(o);
-    return {
+    if (o && typeof o.length === "number") return {
         next: function () {
             if (o && i >= o.length) o = void 0;
             return { value: o && o[i++], done: !o };
         }
     };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 }
 
 function __read(o, n) {
@@ -383,13 +841,28 @@ function __importDefault(mod) {
     return (mod && mod.__esModule) ? mod : { default: mod };
 }
 
+function __classPrivateFieldGet(receiver, privateMap) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to get private field on non-instance");
+    }
+    return privateMap.get(receiver);
+}
+
+function __classPrivateFieldSet(receiver, privateMap, value) {
+    if (!privateMap.has(receiver)) {
+        throw new TypeError("attempted to set private field on non-instance");
+    }
+    privateMap.set(receiver, value);
+    return value;
+}
+
 // EXTERNAL MODULE: external {"commonjs":"vue","commonjs2":"vue","root":"Vue"}
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 var external_commonjs_vue_commonjs2_vue_root_Vue_default = /*#__PURE__*/__webpack_require__.n(external_commonjs_vue_commonjs2_vue_root_Vue_);
 
 // CONCATENATED MODULE: ./node_modules/vue-class-component/dist/vue-class-component.esm.js
 /**
-  * vue-class-component v7.2.2
+  * vue-class-component v7.2.6
   * (c) 2015-present Evan You
   * @license MIT
   */
@@ -533,17 +1006,15 @@ function collectDataFromConstructor(vm, Component) {
     }
 
     keys.forEach(function (key) {
-      if (key.charAt(0) !== '_') {
-        Object.defineProperty(_this, key, {
-          get: function get() {
-            return vm[key];
-          },
-          set: function set(value) {
-            vm[key] = value;
-          },
-          configurable: true
-        });
-      }
+      Object.defineProperty(_this, key, {
+        get: function get() {
+          return vm[key];
+        },
+        set: function set(value) {
+          vm[key] = value;
+        },
+        configurable: true
+      });
     });
   }; // should be acquired class property values
 
@@ -705,15 +1176,67 @@ vue_class_component_esm_Component.registerHooks = function registerHooks(keys) {
 /* harmony default export */ var vue_class_component_esm = (vue_class_component_esm_Component);
 
 
-// CONCATENATED MODULE: ./node_modules/vue-property-decorator/lib/vue-property-decorator.js
-/** vue-property-decorator verson 8.2.2 MIT LICENSE copyright 2019 kaorun343 */
-/// <reference types='reflect-metadata'/>
+// CONCATENATED MODULE: ./node_modules/vue-property-decorator/lib/decorators/Emit.js
+var Emit_spreadArrays = (undefined && undefined.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
+// Code copied from Vue/src/shared/util.js
+var hyphenateRE = /\B([A-Z])/g;
+var hyphenate = function (str) { return str.replace(hyphenateRE, '-$1').toLowerCase(); };
+/**
+ * decorator of an event-emitter function
+ * @param  event The name of the event
+ * @return MethodDecorator
+ */
+function Emit(event) {
+    return function (_target, propertyKey, descriptor) {
+        var key = hyphenate(propertyKey);
+        var original = descriptor.value;
+        descriptor.value = function emitter() {
+            var _this = this;
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            var emit = function (returnValue) {
+                var emitName = event || key;
+                if (returnValue === undefined) {
+                    if (args.length === 0) {
+                        _this.$emit(emitName);
+                    }
+                    else if (args.length === 1) {
+                        _this.$emit(emitName, args[0]);
+                    }
+                    else {
+                        _this.$emit.apply(_this, Emit_spreadArrays([emitName], args));
+                    }
+                }
+                else {
+                    args.unshift(returnValue);
+                    _this.$emit.apply(_this, Emit_spreadArrays([emitName], args));
+                }
+            };
+            var returnValue = original.apply(this, args);
+            if (isPromise(returnValue)) {
+                returnValue.then(emit);
+            }
+            else {
+                emit(returnValue);
+            }
+            return returnValue;
+        };
+    };
+}
+function isPromise(obj) {
+    return obj instanceof Promise || (obj && typeof obj.then === 'function');
+}
 
+// CONCATENATED MODULE: ./node_modules/vue-property-decorator/lib/decorators/Inject.js
 
-
-
-/** Used for keying reactive provide/inject properties */
-var reactiveInjectKey = '__reactiveInject__';
 /**
  * decorator of an inject
  * @param from key
@@ -729,6 +1252,56 @@ function Inject(options) {
         }
     });
 }
+
+// CONCATENATED MODULE: ./node_modules/vue-property-decorator/lib/helpers/provideInject.js
+function needToProduceProvide(original) {
+    return (typeof original !== 'function' ||
+        (!original.managed && !original.managedReactive));
+}
+function produceProvide(original) {
+    var provide = function () {
+        var _this = this;
+        var rv = typeof original === 'function' ? original.call(this) : original;
+        rv = Object.create(rv || null);
+        // set reactive services (propagates previous services if necessary)
+        rv[reactiveInjectKey] = Object.create(this[reactiveInjectKey] || {});
+        for (var i in provide.managed) {
+            rv[provide.managed[i]] = this[i];
+        }
+        var _loop_1 = function (i) {
+            rv[provide.managedReactive[i]] = this_1[i]; // Duplicates the behavior of `@Provide`
+            Object.defineProperty(rv[reactiveInjectKey], provide.managedReactive[i], {
+                enumerable: true,
+                configurable: true,
+                get: function () { return _this[i]; },
+            });
+        };
+        var this_1 = this;
+        for (var i in provide.managedReactive) {
+            _loop_1(i);
+        }
+        return rv;
+    };
+    provide.managed = {};
+    provide.managedReactive = {};
+    return provide;
+}
+/** Used for keying reactive provide/inject properties */
+var reactiveInjectKey = '__reactiveInject__';
+function inheritInjected(componentOptions) {
+    // inject parent reactive services (if any)
+    if (!Array.isArray(componentOptions.inject)) {
+        componentOptions.inject = componentOptions.inject || {};
+        componentOptions.inject[reactiveInjectKey] = {
+            from: reactiveInjectKey,
+            default: {},
+        };
+    }
+}
+
+// CONCATENATED MODULE: ./node_modules/vue-property-decorator/lib/decorators/InjectReactive.js
+
+
 /**
  * decorator of a reactive inject
  * @param from key
@@ -752,80 +1325,27 @@ function InjectReactive(options) {
         }
     });
 }
-/**
- * decorator of a provide
- * @param key key
- * @return PropertyDecorator | void
- */
-function Provide(key) {
-    return createDecorator(function (componentOptions, k) {
-        var provide = componentOptions.provide;
-        if (typeof provide !== 'function' || !provide.managed) {
-            var original_1 = componentOptions.provide;
-            provide = componentOptions.provide = function () {
-                var rv = Object.create((typeof original_1 === 'function' ? original_1.call(this) : original_1) ||
-                    null);
-                for (var i in provide.managed)
-                    rv[provide.managed[i]] = this[i];
-                return rv;
-            };
-            provide.managed = {};
-        }
-        provide.managed[k] = key || k;
-    });
-}
-/**
- * decorator of a reactive provide
- * @param key key
- * @return PropertyDecorator | void
- */
-function ProvideReactive(key) {
-    return createDecorator(function (componentOptions, k) {
-        var provide = componentOptions.provide;
-        // inject parent reactive services (if any)
-        if (!Array.isArray(componentOptions.inject)) {
-            componentOptions.inject = componentOptions.inject || {};
-            componentOptions.inject[reactiveInjectKey] = { from: reactiveInjectKey, default: {} };
-        }
-        if (typeof provide !== 'function' || !provide.managedReactive) {
-            var original_2 = componentOptions.provide;
-            provide = componentOptions.provide = function () {
-                var _this = this;
-                var rv = typeof original_2 === 'function'
-                    ? original_2.call(this)
-                    : original_2;
-                rv = Object.create(rv || null);
-                // set reactive services (propagates previous services if necessary)
-                rv[reactiveInjectKey] = this[reactiveInjectKey] || {};
-                var _loop_1 = function (i) {
-                    rv[provide.managedReactive[i]] = this_1[i]; // Duplicates the behavior of `@Provide`
-                    Object.defineProperty(rv[reactiveInjectKey], provide.managedReactive[i], {
-                        enumerable: true,
-                        get: function () { return _this[i]; },
-                    });
-                };
-                var this_1 = this;
-                for (var i in provide.managedReactive) {
-                    _loop_1(i);
-                }
-                return rv;
-            };
-            provide.managedReactive = {};
-        }
-        provide.managedReactive[k] = key || k;
-    });
-}
+
+// CONCATENATED MODULE: ./node_modules/vue-property-decorator/lib/helpers/metadata.js
 /** @see {@link https://github.com/vuejs/vue-class-component/blob/master/src/reflect.ts} */
 var reflectMetadataIsSupported = typeof Reflect !== 'undefined' && typeof Reflect.getMetadata !== 'undefined';
 function applyMetadata(options, target, key) {
     if (reflectMetadataIsSupported) {
         if (!Array.isArray(options) &&
             typeof options !== 'function' &&
+            !options.hasOwnProperty('type') &&
             typeof options.type === 'undefined') {
-            options.type = Reflect.getMetadata('design:type', target, key);
+            var type = Reflect.getMetadata('design:type', target, key);
+            if (type !== Object) {
+                options.type = type;
+            }
         }
     }
 }
+
+// CONCATENATED MODULE: ./node_modules/vue-property-decorator/lib/decorators/Model.js
+
+
 /**
  * decorator of model
  * @param  event event name
@@ -843,6 +1363,41 @@ function Model(event, options) {
         })(target, key);
     };
 }
+
+// CONCATENATED MODULE: ./node_modules/vue-property-decorator/lib/decorators/ModelSync.js
+
+
+/**
+ * decorator of synced model and prop
+ * @param propName the name to interface with from outside, must be different from decorated property
+ * @param  event event name
+ * @param options options
+ * @return PropertyDecorator
+ */
+function ModelSync(propName, event, options) {
+    if (options === void 0) { options = {}; }
+    return function (target, key) {
+        applyMetadata(options, target, key);
+        createDecorator(function (componentOptions, k) {
+            ;
+            (componentOptions.props || (componentOptions.props = {}))[propName] = options;
+            componentOptions.model = { prop: propName, event: event || k };
+            (componentOptions.computed || (componentOptions.computed = {}))[k] = {
+                get: function () {
+                    return this[propName];
+                },
+                set: function (value) {
+                    // @ts-ignore
+                    this.$emit(event, value);
+                },
+            };
+        })(target, key);
+    };
+}
+
+// CONCATENATED MODULE: ./node_modules/vue-property-decorator/lib/decorators/Prop.js
+
+
 /**
  * decorator of a prop
  * @param  options the options for the prop
@@ -858,6 +1413,10 @@ function Prop(options) {
         })(target, key);
     };
 }
+
+// CONCATENATED MODULE: ./node_modules/vue-property-decorator/lib/decorators/PropSync.js
+
+
 /**
  * decorator of a synced prop
  * @param propName the name to interface with from outside, must be different from decorated property
@@ -866,7 +1425,6 @@ function Prop(options) {
  */
 function PropSync(propName, options) {
     if (options === void 0) { options = {}; }
-    // @ts-ignore
     return function (target, key) {
         applyMetadata(options, target, key);
         createDecorator(function (componentOptions, k) {
@@ -877,13 +1435,94 @@ function PropSync(propName, options) {
                     return this[propName];
                 },
                 set: function (value) {
-                    // @ts-ignore
                     this.$emit("update:" + propName, value);
                 },
             };
         })(target, key);
     };
 }
+
+// CONCATENATED MODULE: ./node_modules/vue-property-decorator/lib/decorators/Provide.js
+
+
+/**
+ * decorator of a provide
+ * @param key key
+ * @return PropertyDecorator | void
+ */
+function Provide(key) {
+    return createDecorator(function (componentOptions, k) {
+        var provide = componentOptions.provide;
+        inheritInjected(componentOptions);
+        if (needToProduceProvide(provide)) {
+            provide = componentOptions.provide = produceProvide(provide);
+        }
+        provide.managed[k] = key || k;
+    });
+}
+
+// CONCATENATED MODULE: ./node_modules/vue-property-decorator/lib/decorators/ProvideReactive.js
+
+
+/**
+ * decorator of a reactive provide
+ * @param key key
+ * @return PropertyDecorator | void
+ */
+function ProvideReactive(key) {
+    return createDecorator(function (componentOptions, k) {
+        var provide = componentOptions.provide;
+        inheritInjected(componentOptions);
+        if (needToProduceProvide(provide)) {
+            provide = componentOptions.provide = produceProvide(provide);
+        }
+        provide.managedReactive[k] = key || k;
+    });
+}
+
+// CONCATENATED MODULE: ./node_modules/vue-property-decorator/lib/decorators/Ref.js
+
+/**
+ * decorator of a ref prop
+ * @param refKey the ref key defined in template
+ */
+function Ref(refKey) {
+    return createDecorator(function (options, key) {
+        options.computed = options.computed || {};
+        options.computed[key] = {
+            cache: false,
+            get: function () {
+                return this.$refs[refKey || key];
+            },
+        };
+    });
+}
+
+// CONCATENATED MODULE: ./node_modules/vue-property-decorator/lib/decorators/VModel.js
+
+/**
+ * decorator for capturings v-model binding to component
+ * @param options the options for the prop
+ */
+function VModel(options) {
+    if (options === void 0) { options = {}; }
+    var valueKey = 'value';
+    return createDecorator(function (componentOptions, key) {
+        ;
+        (componentOptions.props || (componentOptions.props = {}))[valueKey] = options;
+        (componentOptions.computed || (componentOptions.computed = {}))[key] = {
+            get: function () {
+                return this[valueKey];
+            },
+            set: function (value) {
+                this.$emit('input', value);
+            },
+        };
+    });
+}
+
+// CONCATENATED MODULE: ./node_modules/vue-property-decorator/lib/decorators/Watch.js
+
 /**
  * decorator of a watch function
  * @param  path the path or the expression to observe
@@ -907,325 +1546,324 @@ function Watch(path, options) {
         watch[path].push({ handler: handler, deep: deep, immediate: immediate });
     });
 }
-// Code copied from Vue/src/shared/util.js
-var hyphenateRE = /\B([A-Z])/g;
-var hyphenate = function (str) { return str.replace(hyphenateRE, '-$1').toLowerCase(); };
-/**
- * decorator of an event-emitter function
- * @param  event The name of the event
- * @return MethodDecorator
- */
-function Emit(event) {
-    return function (_target, key, descriptor) {
-        key = hyphenate(key);
-        var original = descriptor.value;
-        descriptor.value = function emitter() {
-            var _this = this;
-            var args = [];
-            for (var _i = 0; _i < arguments.length; _i++) {
-                args[_i] = arguments[_i];
-            }
-            var emit = function (returnValue) {
-                if (returnValue !== undefined)
-                    args.unshift(returnValue);
-                _this.$emit.apply(_this, [event || key].concat(args));
-            };
-            var returnValue = original.apply(this, args);
-            if (isPromise(returnValue)) {
-                returnValue.then(function (returnValue) {
-                    emit(returnValue);
-                });
-            }
-            else {
-                emit(returnValue);
-            }
-            return returnValue;
-        };
-    };
-}
-/**
- * decorator of a ref prop
- * @param refKey the ref key defined in template
- */
-function Ref(refKey) {
-    return createDecorator(function (options, key) {
-        options.computed = options.computed || {};
-        options.computed[key] = {
-            cache: false,
-            get: function () {
-                return this.$refs[refKey || key];
-            },
-        };
+
+// CONCATENATED MODULE: ./node_modules/vue-property-decorator/lib/index.js
+/** vue-property-decorator verson 9.1.2 MIT LICENSE copyright 2020 kaorun343 */
+/// <reference types='reflect-metadata'/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// CONCATENATED MODULE: ./src/components/vue-yandex-share/vue-yandex-share.consts.ts
+var DIRECTIONS = ['horizontal', 'vertical'];
+var COPY_POSITIONS = ['first', 'last', 'hidden', 'extraItem'];
+var LANGUAGES = ['az', 'be', 'en', 'hy', 'ka', 'kk', 'ro', 'ru', 'tr', 'tt', 'uk', 'uz'];
+var POPUP_DIRECTIONS = ['bottom', 'top', 'auto'];
+var POPUP_POSITIONS = ['inner', 'outer'];
+var SIZES = ['s', 'm', 'l'];
+var COLOR_SCHEMES = ['blackwhite', 'whiteblack', 'normal'];
+var SERVICES = ['blogger', 'collections', 'delicious', 'digg', 'evernote', 'facebook', 'messenger', 'linkedin', 'lj', 'moimir', 'odnoklassniki', 'pinterest', 'pocket', 'qzone', 'reddit', 'renren', 'sinaWeibo', 'skype', 'surfingbird', 'telegram', 'tencentWeibo', 'tumblr', 'twitter', 'viber', 'vkontakte', 'whatsapp'];
+var SHAPES = ['round', 'normal'];
+var MORE_BUTTON_TYPES = ['long', 'short', null];
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--13-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vue-yandex-share/vue-yandex-share.component.vue?vue&type=script&lang=ts&
+
+
+
+
+var vue_yandex_share_componentvue_type_script_lang_ts_VueYandexShare =
+/** @class */
+function (_super) {
+  __extends(VueYandexShare, _super);
+
+  function VueYandexShare() {
+    var _this = _super !== null && _super.apply(this, arguments) || this;
+    /**
+     * Адрес скрипта
+     *
+     */
+
+
+    _this.src = '//yastatic.net/share2/share.js';
+    /**
+     * Инстанс виджета
+     */
+
+    _this.widget = undefined;
+    return _this;
+  }
+  /**
+   * При изменении входных параметров переподключает виджет
+   */
+
+
+  VueYandexShare.prototype.onPropChanged = function () {
+    this.loadAPIScript(this.$el);
+  };
+  /**
+   * Инициализация виджета
+   *
+   * @param element
+   */
+
+
+  VueYandexShare.prototype.initialize = function (element) {
+    var _this = this;
+
+    var _a, _b;
+
+    this.widget = (_b = (_a = window.Ya) === null || _a === void 0 ? void 0 : _a.share2) === null || _b === void 0 ? void 0 : _b.call(_a, element, {
+      content: {
+        description: this.description,
+        image: this.image,
+        title: this.title || document.title,
+        url: this.url || window.location.href
+      },
+      contentByService: this.contentByService,
+      theme: {
+        bare: this.bare,
+        colorScheme: this.colorScheme,
+        copy: this.copy,
+        curtain: this.curtain,
+        direction: this.direction,
+        lang: this.lang,
+        limit: this.limit,
+        moreButtonType: this.moreButtonType,
+        nonce: this.nonce,
+        popupDirection: this.popupDirection,
+        popupPosition: this.popupPosition,
+        services: this.services.join(','),
+        shape: this.shape,
+        size: this.size,
+        useLinks: this.useLinks
+      },
+      hooks: {
+        onready: function () {
+          _this.$emit('ready');
+        },
+        onshare: function (name) {
+          _this.$emit('share', name);
+        }
+      }
     });
-}
-function isPromise(obj) {
-    return obj instanceof Promise || (obj && typeof obj.then === 'function');
-}
+  };
+  /**
+   * Ожидание загрузки скрипта
+   *
+   * @param element
+   */
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/ts-loader??ref--13-2!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=script&lang=ts&
+
+  VueYandexShare.prototype.pollingScriptLoad = function (element) {
+    var _this = this;
+
+    var pollInterval = setInterval(function () {
+      if (window.Ya) {
+        _this.initialize(element);
+
+        clearInterval(pollInterval);
+      }
+    }, 300);
+    setTimeout(function () {
+      clearInterval(pollInterval);
+    }, 10000);
+  };
+  /**
+   * Подключение скрипта YandexShare
+   *
+   * @param element
+   */
 
 
-var vue_yandex_sharevue_type_script_lang_ts_VueYandexShare = /** @class */ (function (_super) {
-    __extends(VueYandexShare, _super);
-    function VueYandexShare() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        /**
-         * Адрес скрипта
-         */
-        _this.src = '//yastatic.net/share2/share.js';
-        /**
-         * Инстанс виджета
-         */
-        _this.widget = undefined;
-        return _this;
+  VueYandexShare.prototype.loadAPIScript = function (element) {
+    var _this = this;
+
+    var _a, _b; // eslint-disable-next-line no-unused-expressions
+
+
+    (_b = (_a = this.widget) === null || _a === void 0 ? void 0 : _a.destroy) === null || _b === void 0 ? void 0 : _b.call(_a);
+
+    if (!document.querySelectorAll("[src*='" + this.src + "']").length) {
+      var script = document.createElement('script');
+      script.setAttribute('src', this.src);
+      script.setAttribute('async', 'true');
+      script.setAttribute('defer', 'true');
+      document.body.appendChild(script);
+
+      script.onload = function () {
+        _this.$emit('load');
+
+        _this.initialize(element);
+      };
+
+      script.onerror = function (error) {
+        _this.$emit('error', error);
+      };
+    } else {
+      this.pollingScriptLoad(element);
     }
-    /**
-     * При изменении входных параметров переподключает виджет
-     */
-    VueYandexShare.prototype.onPropChanged = function () {
-        this.loadAPIScript(this.$el);
-    };
-    /**
-     * Инициализация виджета
-     *
-     * @param element
-     */
-    VueYandexShare.prototype.initialize = function (element) {
-        var _this = this;
-        var _a, _b, _c;
-        this.widget = (_c = (_a = window.Ya) === null || _a === void 0 ? void 0 : (_b = _a).share2) === null || _c === void 0 ? void 0 : _c.call(_b, element, {
-            content: {
-                url: this.url || window.location.href,
-                title: this.title || document.title,
-                description: this.description,
-                image: this.image,
-            },
-            contentByService: this.contentByService,
-            theme: {
-                bare: this.bare,
-                copy: this.copy,
-                counter: this.counter,
-                direction: this.direction,
-                lang: this.lang,
-                limit: this.limit,
-                popupDirection: this.popupDirection,
-                popupPosition: this.popupPosition,
-                services: this.services.join(','),
-                size: this.size,
-            },
-            hooks: {
-                onready: function () {
-                    _this.$emit('ready');
-                },
-                onshare: function (name) {
-                    _this.$emit('share', name);
-                },
-            },
-        });
-    };
-    /**
-     * Ижидание загрузки скрипта
-     *
-     * @param element
-     */
-    VueYandexShare.prototype.pollingScriptLoad = function (element) {
-        var _this = this;
-        var pollInterval = setInterval(function () {
-            if (window.Ya) {
-                _this.initialize(element);
-                clearInterval(pollInterval);
-            }
-        }, 300);
-        setTimeout(function () {
-            clearInterval(pollInterval);
-        }, 10000);
-    };
-    /**
-     * Подключение скрипта YandexShare
-     *
-     * @param element
-     */
-    VueYandexShare.prototype.loadAPIScript = function (element) {
-        var _this = this;
-        var _a, _b, _c;
-        // eslint-disable-next-line no-unused-expressions
-        (_c = (_a = this.widget) === null || _a === void 0 ? void 0 : (_b = _a).destroy) === null || _c === void 0 ? void 0 : _c.call(_b);
-        if (!document.querySelectorAll("[src*='" + this.src + "']").length) {
-            var script = document.createElement('script');
-            script.setAttribute('src', this.src);
-            script.setAttribute('async', 'true');
-            script.setAttribute('defer', 'true');
-            document.body.appendChild(script);
-            script.onload = function () {
-                _this.$emit('load');
-                _this.initialize(element);
-            };
-            script.onerror = function (error) {
-                _this.$emit('error', error);
-            };
-        }
-        else {
-            this.pollingScriptLoad(element);
-        }
-    };
-    VueYandexShare.prototype.mounted = function () {
-        this.loadAPIScript(this.$el);
-    };
-    __decorate([
-        Prop({ type: String })
-    ], VueYandexShare.prototype, "accessToken", void 0);
-    __decorate([
-        Prop({
-            type: Boolean,
-            default: false,
-        })
-    ], VueYandexShare.prototype, "bare", void 0);
-    __decorate([
-        Prop({
-            type: Boolean,
-            default: false,
-        })
-    ], VueYandexShare.prototype, "counter", void 0);
-    __decorate([
-        Prop({
-            type: String,
-            default: 'last',
-            validator: function (value) {
-                return ['first', 'last', 'hidden'].includes(value);
-            },
-        })
-    ], VueYandexShare.prototype, "copy", void 0);
-    __decorate([
-        Prop({
-            type: String,
-        })
-    ], VueYandexShare.prototype, "description", void 0);
-    __decorate([
-        Prop({
-            type: String,
-            default: 'horizontal',
-            validator: function (value) {
-                return ['horizontal', 'vertical'].includes(value);
-            },
-        })
-    ], VueYandexShare.prototype, "direction", void 0);
-    __decorate([
-        Prop({
-            type: String,
-        })
-    ], VueYandexShare.prototype, "hashtags", void 0);
-    __decorate([
-        Prop({
-            type: String,
-        })
-    ], VueYandexShare.prototype, "image", void 0);
-    __decorate([
-        Prop({
-            type: String,
-            default: 'ru',
-            validator: function (value) {
-                return ['az', 'be', 'en', 'hy', 'ka', 'kk', 'ro', 'ru', 'tr', 'tt', 'uk'].includes(value);
-            },
-        })
-    ], VueYandexShare.prototype, "lang", void 0);
-    __decorate([
-        Prop({
-            type: Number,
-        })
-    ], VueYandexShare.prototype, "limit", void 0);
-    __decorate([
-        Prop({
-            type: String,
-            default: 'bottom',
-            validator: function (value) {
-                return ['bottom', 'top'].includes(value);
-            },
-        })
-    ], VueYandexShare.prototype, "popupDirection", void 0);
-    __decorate([
-        Prop({
-            type: String,
-            default: 'inner',
-            validator: function (value) {
-                return ['inner', 'outer'].includes(value);
-            },
-        })
-    ], VueYandexShare.prototype, "popupPosition", void 0);
-    __decorate([
-        Prop({
-            type: String,
-            default: 'm',
-            validator: function (value) {
-                return ['m', 's'].includes(value);
-            },
-        })
-    ], VueYandexShare.prototype, "size", void 0);
-    __decorate([
-        Prop({
-            type: String,
-        })
-    ], VueYandexShare.prototype, "title", void 0);
-    __decorate([
-        Prop({
-            type: String,
-        })
-    ], VueYandexShare.prototype, "url", void 0);
-    __decorate([
-        Prop({
-            type: Array,
-            default: function () {
-                return [
-                    'blogger',
-                    'delicious',
-                    'digg',
-                    'evernote',
-                    'facebook',
-                    'gplus',
-                    'linkedin',
-                    'lj',
-                    'moimir',
-                    'odnoklassniki',
-                    'pinterest',
-                    'pocket',
-                    'qzone',
-                    'reddit',
-                    'renren',
-                    'sinaWeibo',
-                    'skype',
-                    'surfingbird',
-                    'telegram',
-                    'tencentWeibo',
-                    'tumblr',
-                    'twitter',
-                    'viber',
-                    'vkontakte',
-                    'whatsapp',
-                ];
-            },
-        })
-    ], VueYandexShare.prototype, "services", void 0);
-    __decorate([
-        Prop({
-            type: Object,
-            default: function () {
-                return {};
-            },
-        })
-    ], VueYandexShare.prototype, "contentByService", void 0);
-    __decorate([
-        Watch('$props', { deep: true })
-    ], VueYandexShare.prototype, "onPropChanged", null);
-    VueYandexShare = __decorate([
-        vue_class_component_esm({})
-    ], VueYandexShare);
-    return VueYandexShare;
-}(external_commonjs_vue_commonjs2_vue_root_Vue_default.a));
-/* harmony default export */ var vue_yandex_sharevue_type_script_lang_ts_ = (vue_yandex_sharevue_type_script_lang_ts_VueYandexShare);
+  };
 
-// CONCATENATED MODULE: ./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=script&lang=ts&
- /* harmony default export */ var vue_yandex_share_vue_yandex_sharevue_type_script_lang_ts_ = (vue_yandex_sharevue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/components/vue-yandex-share/vue-yandex-share.vue?vue&type=style&index=0&id=6002b917&lang=postcss&scoped=true&
-var vue_yandex_sharevue_type_style_index_0_id_6002b917_lang_postcss_scoped_true_ = __webpack_require__("51a6");
+  __decorate([Prop({
+    type: Boolean,
+    default: false
+  })], VueYandexShare.prototype, "bare", void 0);
+
+  __decorate([Prop({
+    type: String,
+    default: 'normal',
+    validator: function (value) {
+      return COLOR_SCHEMES.includes(value);
+    }
+  })], VueYandexShare.prototype, "colorScheme", void 0);
+
+  __decorate([Prop({
+    type: String,
+    default: 'last',
+    validator: function (value) {
+      return COPY_POSITIONS.includes(value);
+    }
+  })], VueYandexShare.prototype, "copy", void 0);
+
+  __decorate([Prop({
+    type: Boolean,
+    default: true
+  })], VueYandexShare.prototype, "curtain", void 0);
+
+  __decorate([Prop({
+    type: String
+  })], VueYandexShare.prototype, "description", void 0);
+
+  __decorate([Prop({
+    type: String,
+    default: 'horizontal',
+    validator: function (value) {
+      return DIRECTIONS.includes(value);
+    }
+  })], VueYandexShare.prototype, "direction", void 0);
+
+  __decorate([Prop({
+    type: String
+  })], VueYandexShare.prototype, "hashtags", void 0);
+
+  __decorate([Prop({
+    type: String
+  })], VueYandexShare.prototype, "image", void 0);
+
+  __decorate([Prop({
+    type: String,
+    default: 'ru',
+    validator: function (value) {
+      return LANGUAGES.includes(value);
+    }
+  })], VueYandexShare.prototype, "lang", void 0);
+
+  __decorate([Prop({
+    type: Number,
+    validator: function (value) {
+      return value >= 0 && value <= SERVICES.length;
+    }
+  })], VueYandexShare.prototype, "limit", void 0);
+
+  __decorate([Prop({
+    type: String,
+    default: null,
+    validator: function (value) {
+      return MORE_BUTTON_TYPES.includes(value);
+    }
+  })], VueYandexShare.prototype, "moreButtonType", void 0);
+
+  __decorate([Prop({
+    type: String
+  })], VueYandexShare.prototype, "nonce", void 0);
+
+  __decorate([Prop({
+    type: String,
+    default: 'bottom',
+    validator: function (value) {
+      return POPUP_DIRECTIONS.includes(value);
+    }
+  })], VueYandexShare.prototype, "popupDirection", void 0);
+
+  __decorate([Prop({
+    type: String,
+    default: 'inner',
+    validator: function (value) {
+      return POPUP_POSITIONS.includes(value);
+    }
+  })], VueYandexShare.prototype, "popupPosition", void 0);
+
+  __decorate([Prop({
+    type: Array,
+    default: function () {
+      return ['facebook', 'telegram', 'twitter', 'vkontakte'];
+    }
+  })], VueYandexShare.prototype, "services", void 0);
+
+  __decorate([Prop({
+    type: Array,
+    default: 'normal',
+    validator: function (value) {
+      return SHAPES.includes(value);
+    }
+  })], VueYandexShare.prototype, "shape", void 0);
+
+  __decorate([Prop({
+    type: String,
+    default: 'm',
+    validator: function (value) {
+      return SIZES.includes(value);
+    }
+  })], VueYandexShare.prototype, "size", void 0);
+
+  __decorate([Prop({
+    type: String
+  })], VueYandexShare.prototype, "title", void 0);
+
+  __decorate([Prop({
+    type: String
+  })], VueYandexShare.prototype, "url", void 0);
+
+  __decorate([Prop({
+    type: Boolean,
+    default: false
+  })], VueYandexShare.prototype, "useLinks", void 0);
+
+  __decorate([Prop({
+    type: Object,
+    default: function () {
+      return {};
+    }
+  })], VueYandexShare.prototype, "contentByService", void 0);
+
+  __decorate([Watch('$props', {
+    deep: true
+  })], VueYandexShare.prototype, "onPropChanged", null);
+
+  VueYandexShare = __decorate([vue_class_component_esm({
+    mounted: function () {
+      this.loadAPIScript(this.$el);
+    }
+  })], VueYandexShare);
+  return VueYandexShare;
+}(external_commonjs_vue_commonjs2_vue_root_Vue_default.a);
+
+/* harmony default export */ var vue_yandex_share_componentvue_type_script_lang_ts_ = (vue_yandex_share_componentvue_type_script_lang_ts_VueYandexShare);
+// CONCATENATED MODULE: ./src/components/vue-yandex-share/vue-yandex-share.component.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var vue_yandex_share_vue_yandex_share_componentvue_type_script_lang_ts_ = (vue_yandex_share_componentvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/components/vue-yandex-share/vue-yandex-share.component.vue?vue&type=style&index=0&id=d2ffc23a&lang=scss&scoped=true&
+var vue_yandex_share_componentvue_type_style_index_0_id_d2ffc23a_lang_scss_scoped_true_ = __webpack_require__("78a5");
 
 // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
 /* globals __VUE_SSR_CONTEXT__ */
@@ -1292,7 +1930,12 @@ function normalizeComponent (
     options._ssrRegister = hook
   } else if (injectStyles) {
     hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      ? function () {
+        injectStyles.call(
+          this,
+          (options.functional ? this.parent : this).$root.$options.shadowRoot
+        )
+      }
       : injectStyles
   }
 
@@ -1301,7 +1944,7 @@ function normalizeComponent (
       // for template-only hot-reload because in that case the render fn doesn't
       // go through the normalizer
       options._injectStyles = hook
-      // register for functioal component in vue file
+      // register for functional component in vue file
       var originalRender = options.render
       options.render = function renderWithStyleInjection (h, context) {
         hook.call(context)
@@ -1322,7 +1965,7 @@ function normalizeComponent (
   }
 }
 
-// CONCATENATED MODULE: ./src/components/vue-yandex-share/vue-yandex-share.vue
+// CONCATENATED MODULE: ./src/components/vue-yandex-share/vue-yandex-share.component.vue
 
 
 
@@ -1332,25 +1975,26 @@ function normalizeComponent (
 /* normalize component */
 
 var component = normalizeComponent(
-  vue_yandex_share_vue_yandex_sharevue_type_script_lang_ts_,
+  vue_yandex_share_vue_yandex_share_componentvue_type_script_lang_ts_,
   render,
   staticRenderFns,
   false,
   null,
-  "6002b917",
+  "d2ffc23a",
   null
   
 )
 
-/* harmony default export */ var vue_yandex_share = (component.exports);
-// CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
+/* harmony default export */ var vue_yandex_share_component = (component.exports);
+// CONCATENATED MODULE: ./src/components/vue-yandex-share/index.ts
 
 
-/* harmony default export */ var entry_lib = __webpack_exports__["default"] = (vue_yandex_share);
+// CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib-no-default.js
+
 
 
 
 /***/ })
 
-/******/ })["default"];
+/******/ });
 //# sourceMappingURL=vue-yandex-share.common.js.map
