@@ -75,7 +75,7 @@
       <template #config>
         <el-form label-position="top" size="mini">
           <!-- services -->
-          <el-form-item :label="`Список поддерживаемых соцсетей`">
+          <el-form-item label="Список поддерживаемых соцсетей">
             <el-select
               v-model="options.services"
               multiple
@@ -93,7 +93,7 @@
           <!-- /services -->
 
           <!-- size -->
-          <el-form-item :label="`Размер кнопок соцсетей`">
+          <el-form-item label="Размер кнопок соцсетей">
             <el-select v-model="options.size" :popper-append-to-body="false">
               <el-option
                 v-for="item in SIZES"
@@ -109,10 +109,10 @@
           <!-- limit -->
           <el-form-item
             clearable
-            :label="`Количество соцсетей, отображаемых в виде кнопок.
+            label="Количество соцсетей, отображаемых в виде кнопок.
                Используется если нужно встроить в блок много соцсетей, а также чтобы
                блок занимал мало места на странице. Не вошедшие в лимит соцсети будут
-               отображаться в pop-up по нажатию кнопки`"
+               отображаться в pop-up по нажатию кнопки"
           >
             <el-input-number
               v-model="options.limit"
@@ -158,9 +158,9 @@
 
           <!-- popupPosition -->
           <el-form-item
-            :label="`Расположение pop-up относительно контейнера блока. Значение outer
+            label="Расположение pop-up относительно контейнера блока. Значение outer
                может понадобиться в том случае, если из-за специфики верстки вашего
-               сайта pop-up обрезается соседними элементами страницы`"
+               сайта pop-up обрезается соседними элементами страницы"
           >
             <el-select
               v-model="options.popupPosition"
@@ -179,8 +179,8 @@
 
           <!-- copy -->
           <el-form-item
-            :label="`Позиция кнопки 'Скопировать ссылку'. Кнопка Скопировать ссылку
-               может отображаться, если используется параметр limit`"
+            label="Позиция кнопки 'Скопировать ссылку'. Кнопка Скопировать ссылку
+               может отображаться, если используется параметр limit"
           >
             <el-select v-model="options.copy" :popper-append-to-body="false">
               <el-option
@@ -211,10 +211,7 @@
           <!-- /lang -->
 
           <!-- title -->
-          <el-form-item
-            clearable
-            :label="`Заголовок, которым нужно поделиться`"
-          >
+          <el-form-item clearable label="Заголовок, которым нужно поделиться">
             <el-input v-model="options.title" clearable></el-input>
           </el-form-item>
           <!-- /title -->
@@ -226,7 +223,7 @@
           <!-- /description -->
 
           <!-- url -->
-          <el-form-item clearable :label="`Ссылка, которой нужно поделиться`">
+          <el-form-item clearable label="Ссылка, которой нужно поделиться">
             <el-input v-model="options.url" clearable></el-input>
           </el-form-item>
           <!-- /url -->
@@ -234,7 +231,7 @@
           <!-- hashtags -->
           <el-form-item
             clearable
-            :label="`Хэштеги. Актуальны и работают только для Твиттера`"
+            label="Хэштеги. Актуальны и работают только для Твиттера"
           >
             <el-input v-model="options.hashtags" clearable></el-input>
           </el-form-item>
@@ -243,7 +240,7 @@
           <!-- accessToken -->
           <el-form-item
             clearable
-            :label="`Токен для снятия ограничения запросов на получение счетчика. Актуален и работает только для Facebook`"
+            label="Токен для снятия ограничения запросов на получение счетчика. Актуален и работает только для Facebook"
           >
             <el-input v-model="options.accessToken" clearable></el-input>
           </el-form-item>

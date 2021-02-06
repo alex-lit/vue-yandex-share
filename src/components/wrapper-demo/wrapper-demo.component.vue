@@ -54,26 +54,28 @@
     background-color: var(--white);
     box-shadow: -5px 8px 20px rgba(0, 0, 0, 0.05);
 
-    & ::v-deep {
+    ::v-deep {
       .el-form {
         display: grid;
         gap: 2rem;
       }
 
-      & .el-divider {
-        & >>> .el-divider__text {
-          background-color: var(--white);
-        }
-      }
-
-      & .el-form-item {
-        & .el-form-item__label {
-          line-height: 1.4;
-        }
-      }
-
       .el-select {
         width: 100%;
+      }
+
+      .el-divider {
+        ::v-deep & {
+          .el-divider__text {
+            background-color: var(--white);
+          }
+        }
+      }
+
+      .el-form-item {
+        .el-form-item__label {
+          line-height: 1.4;
+        }
       }
     }
   }

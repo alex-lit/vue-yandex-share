@@ -1,4 +1,11 @@
-# Обновляет зависимости
-npx npm-check-updates -u
-npm i
-npm audit fix
+# Update dependencies (latest, newest, greatest, minor, patch)
+
+VERSION=${1:-minor}
+YELLOW='\e[33m'
+DEFAULT='\e[39m'
+
+echo "Upgrading dependencies to version: ${YELLOW}${VERSION}${DEFAULT}"
+
+npx npm-check-updates --upgrade --target ${VERSION}
+npm i --no-optional --force
+npm audit fix --force

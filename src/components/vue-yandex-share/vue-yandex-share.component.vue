@@ -21,17 +21,6 @@
   })
   export default class VueYandexShare extends Vue {
     /**
-     * Адрес скрипта
-     *
-     */
-    private src: string = '//yastatic.net/share2/share.js';
-
-    /**
-     * Инстанс виджета
-     */
-    private widget: Record<string, any> | undefined = undefined;
-
-    /**
      * Признак того, что загрузка стилей отключена. Если добавить атрибут,
      * соцсети будут отображаться в виде текстового вертикального списка
      *
@@ -44,7 +33,7 @@
       type: Boolean,
       default: false,
     })
-    private bare!: boolean;
+    readonly bare!: boolean;
 
     /**
      * Цветовая схема кнопок соцсетей
@@ -56,7 +45,7 @@
         return COLOR_SCHEMES.includes(value);
       },
     })
-    private colorScheme!: typeof COLOR_SCHEMES[number];
+    readonly colorScheme!: typeof COLOR_SCHEMES[number];
 
     /**
      * Позиция кнопки **Скопировать ссылку**. Кнопка Скопировать ссылку может
@@ -74,7 +63,7 @@
         return COPY_POSITIONS.includes(value);
       },
     })
-    private copy!: typeof COPY_POSITIONS[number];
+    readonly copy!: typeof COPY_POSITIONS[number];
 
     /**
      * Указание на мобильных устройствах вместо pop-up выводить окно, похожее на
@@ -89,7 +78,7 @@
       type: Boolean,
       default: true,
     })
-    private curtain!: boolean;
+    readonly curtain!: boolean;
 
     /**
      * Текст, которым нужно поделиться
@@ -102,7 +91,7 @@
     @Prop({
       type: String,
     })
-    private description!: string;
+    readonly description!: string;
 
     /**
      * Направление списка кнопок
@@ -114,7 +103,7 @@
         return DIRECTIONS.includes(value);
       },
     })
-    private direction!: typeof DIRECTIONS[number];
+    readonly direction!: typeof DIRECTIONS[number];
 
     /**
      * Хэштеги. Актуальны и работают только для Твиттера
@@ -131,7 +120,7 @@
     @Prop({
       type: String,
     })
-    private hashtags!: string;
+    readonly hashtags!: string;
 
     /**
      * Изображение, которым нужно поделиться
@@ -139,7 +128,7 @@
     @Prop({
       type: String,
     })
-    private image!: string;
+    readonly image!: string;
 
     /**
      * Язык блока. Локализуются подписи кнопок соцсетей и кнопка Скопировать
@@ -152,7 +141,7 @@
         return LANGUAGES.includes(value);
       },
     })
-    private lang!: typeof LANGUAGES[number];
+    readonly lang!: typeof LANGUAGES[number];
 
     /**
      * Количество соцсетей, отображаемых в виде кнопок. Используется если нужно
@@ -166,7 +155,7 @@
         return value >= 0 && value <= SERVICES.length;
       },
     })
-    private limit!: number;
+    readonly limit!: number;
 
     /**
      * Вид кнопки открытия pop-up, если значение `limit` равно `0`.
@@ -178,7 +167,7 @@
         return MORE_BUTTON_TYPES.includes(value);
       },
     })
-    private moreButtonType!: typeof MORE_BUTTON_TYPES[number];
+    readonly moreButtonType!: typeof MORE_BUTTON_TYPES[number];
 
     /**
      * Идентификатор директивы
@@ -191,7 +180,7 @@
     @Prop({
       type: String,
     })
-    private nonce!: string;
+    readonly nonce!: string;
 
     /**
      * Направление открытия pop-up
@@ -203,7 +192,7 @@
         return POPUP_DIRECTIONS.includes(value);
       },
     })
-    private popupDirection!: typeof POPUP_DIRECTIONS[number];
+    readonly popupDirection!: typeof POPUP_DIRECTIONS[number];
 
     /**
      * Расположение pop-up относительно контейнера блока. Значение outer может
@@ -217,7 +206,7 @@
         return POPUP_POSITIONS.includes(value);
       },
     })
-    private popupPosition!: typeof POPUP_POSITIONS[number];
+    readonly popupPosition!: typeof POPUP_POSITIONS[number];
 
     /**
      * Список идентификаторов социальных сетей, отображаемых в блоке.
@@ -228,7 +217,7 @@
         return ['facebook', 'telegram', 'twitter', 'vkontakte'];
       },
     })
-    private services!: typeof SERVICES[number][];
+    readonly services!: typeof SERVICES[number][];
 
     /**
      * Форма кнопок соцсетей.
@@ -240,7 +229,7 @@
         return SHAPES.includes(value);
       },
     })
-    private shape!: typeof SHAPES[number][];
+    readonly shape!: typeof SHAPES[number][];
 
     /**
      * Размер кнопок соцсетей
@@ -252,7 +241,7 @@
         return SIZES.includes(value);
       },
     })
-    private size!: typeof SIZES[number];
+    readonly size!: typeof SIZES[number];
 
     /**
      * Заголовок, которым нужно поделиться
@@ -260,7 +249,7 @@
     @Prop({
       type: String,
     })
-    private title!: string;
+    readonly title!: string;
 
     /**
      * Ссылка, которой нужно поделиться
@@ -268,7 +257,7 @@
     @Prop({
       type: String,
     })
-    private url!: string;
+    readonly url!: string;
 
     /**
      * Указание, что страницу отправки ссылки нужно всегда открывать в новом
@@ -279,7 +268,7 @@
       type: Boolean,
       default: false,
     })
-    private useLinks!: boolean;
+    readonly useLinks!: boolean;
 
     /**
      * Параметры контента для каждой соцсети отдельно
@@ -307,7 +296,18 @@
         return {};
       },
     })
-    private contentByService!: Record<string, any>;
+    readonly contentByService!: Record<string, any>;
+
+    /**
+     * Адрес скрипта
+     *
+     */
+    src: string = '//yastatic.net/share2/share.js';
+
+    /**
+     * Инстанс виджета
+     */
+    widget: Record<string, any> | undefined = undefined;
 
     /**
      * При изменении входных параметров переподключает виджет
@@ -397,6 +397,7 @@
           this.$emit('load');
           this.initialize(element);
         };
+
         script.onerror = (error) => {
           this.$emit('error', error);
         };
