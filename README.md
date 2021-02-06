@@ -9,6 +9,8 @@ Vue-компонент для блока «Поделиться» от Янде�
 
 [Документация Яндекс](//yandex.ru/dev/share/)
 
+[Документация плагина](//github.com/alex-lit/vue-yandex-share/blob/master/src/components/vue-yandex-share/vue-yandex-share.component.vue)
+
 [DEMO](//alex-lit.github.io/vue-yandex-share/)
 
 ## Установка
