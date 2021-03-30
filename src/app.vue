@@ -1,4 +1,5 @@
 <script lang="ts">
+  /* eslint-disable @typescript-eslint/naming-convention */
   import { Component, Vue } from 'vue-property-decorator';
   import { VueGithubCorners } from 'vue2-github-corners';
 
@@ -15,14 +16,35 @@
   } from '@/components/vue-yandex-share';
   import WrapperDemo from '@/components/wrapper-demo';
 
+  /**
+   *
+   */
   @Component<App>({
-    components: { VueYandexShare, VueGithubCorners, WrapperDemo },
+    components: { VueGithubCorners, VueYandexShare, WrapperDemo },
 
     mounted() {
       console.log(process.env.npm_package_version);
     },
   })
   export default class App extends Vue {
+    COLOR_SCHEMES = COLOR_SCHEMES;
+
+    COPY_POSITIONS = COPY_POSITIONS;
+
+    DIRECTIONS = DIRECTIONS;
+
+    LANGUAGES = LANGUAGES;
+
+    POPUP_DIRECTIONS = POPUP_DIRECTIONS;
+
+    POPUP_POSITIONS = POPUP_POSITIONS;
+
+    SERVICES = SERVICES;
+
+    SHAPES = SHAPES;
+
+    SIZES = SIZES;
+
     /**
      * Параметры компонента VueYandexShare
      */
@@ -31,33 +53,23 @@
       colorScheme: 'normal',
       copy: 'last',
       curtain: true,
-      description: null,
+      description: undefined,
       direction: 'horizontal',
       hashtags: 'vue,social',
-      image: null,
+      image: undefined,
       lang: 'ru',
       limit: SERVICES.length,
-      moreButtonType: null,
+      moreButtonType: undefined,
       nonce: '',
       popupDirection: 'bottom',
       popupPosition: 'inner',
       services: ['facebook', 'telegram', 'twitter', 'vkontakte'],
       shape: 'normal',
       size: 'm',
-      title: null,
-      url: null,
+      title: undefined,
+      url: undefined,
       useLinks: false,
     };
-
-    COLOR_SCHEMES = COLOR_SCHEMES;
-    COPY_POSITIONS = COPY_POSITIONS;
-    DIRECTIONS = DIRECTIONS;
-    LANGUAGES = LANGUAGES;
-    POPUP_DIRECTIONS = POPUP_DIRECTIONS;
-    POPUP_POSITIONS = POPUP_POSITIONS;
-    SERVICES = SERVICES;
-    SHAPES = SHAPES;
-    SIZES = SIZES;
   }
 </script>
 
@@ -260,8 +272,8 @@
 <style lang="scss" scoped>
   .github-corners {
     position: sticky;
-    z-index: 100;
-    top: 0;
     right: 0;
+    top: 0;
+    z-index: 100;
   }
 </style>

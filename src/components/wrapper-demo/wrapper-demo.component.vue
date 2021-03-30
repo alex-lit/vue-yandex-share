@@ -3,6 +3,9 @@
 
   import { Component, Vue } from 'vue-property-decorator';
 
+  /**
+   *
+   */
   @Component<WrapperDemo>({})
   export default class WrapperDemo extends Vue {}
 </script>
@@ -29,30 +32,30 @@
 
 <style lang="scss" scoped>
   .wrapper-demo {
-    display: grid;
-    max-height: 100vh;
     background-color: var(--white);
+    display: grid;
     grid-template-columns: 400px 1fr;
+    max-height: 100vh;
   }
 
   .wrapper-demo__widget-wrapper {
+    align-items: center;
+    background-image: url('./assets/images/transparent.png');
     display: flex;
-    overflow: auto;
-    max-height: inherit;
     flex-direction: column;
     flex-grow: 1;
-    align-items: center;
     justify-content: center;
+    max-height: inherit;
+    overflow: auto;
     padding: 2rem;
-    background-image: url('./assets/images/transparent.png');
   }
 
   .wrapper-demo__widget-config {
-    overflow: auto;
-    max-height: inherit;
-    padding: 2rem;
     background-color: var(--white);
     box-shadow: -5px 8px 20px rgba(0, 0, 0, 0.05);
+    max-height: inherit;
+    overflow: auto;
+    padding: 2rem;
 
     ::v-deep {
       .el-form {

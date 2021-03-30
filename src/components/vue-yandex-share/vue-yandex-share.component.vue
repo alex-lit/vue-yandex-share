@@ -14,6 +14,9 @@
     SIZES,
   } from './vue-yandex-share.consts';
 
+  /**
+   *
+   */
   @Component<VueYandexShare>({
     mounted() {
       this.loadAPIScript(this.$el);
@@ -30,8 +33,8 @@
      * ```
      */
     @Prop({
-      type: Boolean,
       default: false,
+      type: Boolean,
     })
     readonly bare!: boolean;
 
@@ -39,13 +42,43 @@
      * Цветовая схема кнопок соцсетей
      */
     @Prop({
-      type: String,
       default: 'normal',
+      type: String,
+
       validator(value) {
         return COLOR_SCHEMES.includes(value);
       },
     })
     readonly colorScheme!: typeof COLOR_SCHEMES[number];
+
+    /**
+     * Параметры контента для каждой соцсети отдельно
+     *
+     * @example
+     * ```html
+     * <vue-yandex-share :contentByService="{
+     *   twitter: {
+     *     url: 'https://ya.ru',
+     *     title: 'Яндекс',
+     *     hashtags: 'yandex,share'
+     *   },
+     *   facebook: {
+     *     url: 'https://ya.ru',
+     *     title: 'Яндекс',
+     *     accessToken: 'fb-token'
+     *   }
+     * }"
+     * ></vue-yandex-share>
+     * ```
+     */
+    @Prop({
+      default() {
+        return {};
+      },
+
+      type: Object,
+    })
+    readonly contentByService!: Record<string, any>;
 
     /**
      * Позиция кнопки **Скопировать ссылку**. Кнопка Скопировать ссылку может
@@ -57,8 +90,9 @@
      * ```
      */
     @Prop({
-      type: String,
       default: 'last',
+      type: String,
+
       validator(value) {
         return COPY_POSITIONS.includes(value);
       },
@@ -75,8 +109,8 @@
      * ```
      */
     @Prop({
-      type: Boolean,
       default: true,
+      type: Boolean,
     })
     readonly curtain!: boolean;
 
@@ -97,8 +131,9 @@
      * Направление списка кнопок
      */
     @Prop({
-      type: String,
       default: 'horizontal',
+      type: String,
+
       validator(value) {
         return DIRECTIONS.includes(value);
       },
@@ -135,8 +170,9 @@
      * ссылку
      */
     @Prop({
-      type: String,
       default: 'ru',
+      type: String,
+
       validator(value) {
         return LANGUAGES.includes(value);
       },
@@ -151,6 +187,7 @@
      */
     @Prop({
       type: Number,
+
       validator(value) {
         return value >= 0 && value <= SERVICES.length;
       },
@@ -161,8 +198,9 @@
      * Вид кнопки открытия pop-up, если значение `limit` равно `0`.
      */
     @Prop({
+      default: undefined,
       type: String,
-      default: null,
+
       validator(value) {
         return MORE_BUTTON_TYPES.includes(value);
       },
@@ -186,8 +224,9 @@
      * Направление открытия pop-up
      */
     @Prop({
-      type: String,
       default: 'bottom',
+      type: String,
+
       validator(value) {
         return POPUP_DIRECTIONS.includes(value);
       },
@@ -200,8 +239,9 @@
      * pop-up обрезается соседними элементами страницы
      */
     @Prop({
-      type: String,
       default: 'inner',
+      type: String,
+
       validator(value) {
         return POPUP_POSITIONS.includes(value);
       },
@@ -212,10 +252,11 @@
      * Список идентификаторов социальных сетей, отображаемых в блоке.
      */
     @Prop({
-      type: Array,
       default() {
         return ['facebook', 'telegram', 'twitter', 'vkontakte'];
       },
+
+      type: Array,
     })
     readonly services!: typeof SERVICES[number][];
 
@@ -223,8 +264,9 @@
      * Форма кнопок соцсетей.
      */
     @Prop({
-      type: Array,
       default: 'normal',
+      type: Array,
+
       validator(value) {
         return SHAPES.includes(value);
       },
@@ -235,8 +277,9 @@
      * Размер кнопок соцсетей
      */
     @Prop({
-      type: String,
       default: 'm',
+      type: String,
+
       validator(value) {
         return SIZES.includes(value);
       },
@@ -265,44 +308,16 @@
      * всплывающем окне (возможность зависит от соцсети и браузера).
      */
     @Prop({
-      type: Boolean,
       default: false,
+      type: Boolean,
     })
     readonly useLinks!: boolean;
-
-    /**
-     * Параметры контента для каждой соцсети отдельно
-     *
-     * @example
-     * ```html
-     * <vue-yandex-share :contentByService="{
-     *   twitter: {
-     *     url: 'https://ya.ru',
-     *     title: 'Яндекс',
-     *     hashtags: 'yandex,share'
-     *   },
-     *   facebook: {
-     *     url: 'https://ya.ru',
-     *     title: 'Яндекс',
-     *     accessToken: 'fb-token'
-     *   }
-     * }"
-     * ></vue-yandex-share>
-     * ```
-     */
-    @Prop({
-      type: Object,
-      default() {
-        return {};
-      },
-    })
-    readonly contentByService!: Record<string, any>;
 
     /**
      * Адрес скрипта
      *
      */
-    src: string = '//yastatic.net/share2/share.js';
+    src = '//yastatic.net/share2/share.js';
 
     /**
      * Инстанс виджета
@@ -330,7 +345,19 @@
           title: this.title || document.title,
           url: this.url || window.location.href,
         },
+
         contentByService: this.contentByService,
+
+        hooks: {
+          onready: () => {
+            this.$emit('ready');
+          },
+
+          onshare: (name: string) => {
+            this.$emit('share', name);
+          },
+        },
+
         theme: {
           bare: this.bare,
           colorScheme: this.colorScheme,
@@ -348,15 +375,38 @@
           size: this.size,
           useLinks: this.useLinks,
         },
-        hooks: {
-          onready: () => {
-            this.$emit('ready');
-          },
-          onshare: (name: string) => {
-            this.$emit('share', name);
-          },
-        },
       });
+    }
+
+    /**
+     * Подключение скрипта YandexShare
+     *
+     * @param element
+     */
+    loadAPIScript(element: Element | string) {
+      // eslint-disable-next-line no-unused-expressions
+      this.widget?.destroy?.();
+
+      if (document.querySelectorAll(`[src*='${this.src}']`).length === 0) {
+        const script: HTMLScriptElement = document.createElement('script');
+
+        script.setAttribute('src', this.src);
+        script.setAttribute('async', 'true');
+        script.setAttribute('defer', 'true');
+
+        document.body.append(script);
+
+        script.addEventListener('load', () => {
+          this.$emit('load');
+          this.initialize(element);
+        });
+
+        script.addEventListener('error', (error) => {
+          this.$emit('error', error);
+        });
+      } else {
+        this.pollingScriptLoad(element);
+      }
     }
 
     /**
@@ -371,39 +421,10 @@
           clearInterval(pollInterval);
         }
       }, 300);
+
       setTimeout(() => {
         clearInterval(pollInterval);
       }, 10000);
-    }
-
-    /**
-     * Подключение скрипта YandexShare
-     *
-     * @param element
-     */
-    loadAPIScript(element: Element | string) {
-      // eslint-disable-next-line no-unused-expressions
-      this.widget?.destroy?.();
-
-      if (!document.querySelectorAll(`[src*='${this.src}']`).length) {
-        const script: HTMLScriptElement = document.createElement('script');
-        script.setAttribute('src', this.src);
-        script.setAttribute('async', 'true');
-        script.setAttribute('defer', 'true');
-
-        document.body.appendChild(script);
-
-        script.onload = () => {
-          this.$emit('load');
-          this.initialize(element);
-        };
-
-        script.onerror = (error) => {
-          this.$emit('error', error);
-        };
-      } else {
-        this.pollingScriptLoad(element);
-      }
     }
   }
 </script>
