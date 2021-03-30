@@ -144,12 +144,12 @@
      * Хэштеги. Актуальны и работают только для Твиттера
      *
      * @description
-     * Строка, указывается без знака #. Несколько хэштегов
+     * Строка, указывается без знака #. Несколько хештегов
      * указываются через запятую, без пробела.
      *
      * @example
      * ```html
-     * <vue-yandex-share hashtags="vuethebest,reactnoway"></vue-yandex-share>
+     * <vue-yandex-share hashtags="front,react"></vue-yandex-share>
      * ```
      */
     @Prop({
